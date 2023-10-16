@@ -7,6 +7,7 @@ import Join from './pages/Join';
 import Login from './pages/Login';
 import axios from './api/axios';
 import { useEffect, useState } from 'react';
+//dkssud테스트테스트
 
 function App() {
   const [isLoined, setIsLogied] = useState(false);
