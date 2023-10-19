@@ -4,10 +4,16 @@ import React, { useState } from 'react';
 import FormHeader from '../components/FormHeader';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
-import axios from '../api/axios';
+import axiosConfig from '../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 
-export default function Login({ setUserInfo, setIsLogied }) {
+import { userInfoState, isLoggedInState } from '../recoilAtoms';
+import { useRecoilState } from 'recoil';
+
+export default function Login() {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
+
   const navigator = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +28,7 @@ export default function Login({ setUserInfo, setIsLogied }) {
   ];
   const isLogin = async () => {
     try {
-      const result = await axios.post(
+      const result = await axiosConfig.post(
         '/auth/login',
         {
           email: email,
@@ -32,13 +38,18 @@ export default function Login({ setUserInfo, setIsLogied }) {
       );
       console.log('로그인 요청 성공 : ', result);
       if (result.status === 200) {
-        setIsLogied(true);
+        setUserInfo(result.data.userInfo);
+        setIsLoggedIn(result.data.isLoggedIn);
         navigator('/');
       }
     } catch (error) {
       console.log('로그인 요청 실패 : ', error);
     }
   };
+  const isJoin = () => {
+    navigator('/join');
+  };
+
   return (
     <div className='flex flex-col h-screen justify-center items-center'>
       <FormHeader text={'Login'} />
@@ -55,6 +66,7 @@ export default function Login({ setUserInfo, setIsLogied }) {
           );
         })}
         <FormButton submitFunc={isLogin} text={'Login'} />
+        <FormButton submitFunc={isJoin} text={'Signup'} />
       </form>
     </div>
   );

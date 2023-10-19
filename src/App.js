@@ -1,32 +1,42 @@
 /** @format */
 import './App.css';
 
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
+import axiosConfig from './api/axiosConfig';
+import { useEffect } from 'react';
+
+import { userInfoState, isLoggedInState } from './recoilAtoms';
+import { useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
+
+import Header from './components/Header';
 import Join from './pages/Join';
 import Login from './pages/Login';
-import axios from './api/axios';
-import { useEffect, useState } from 'react';
-//dkssud테스트테스트
+import MyPage from './pages/MyPage';
+import Serch from './pages/Serch';
+import Home from './pages/Home';
+import Detail from './pages/Detail';
+import Create from './pages/Create';
 
 function App() {
-  const [isLoined, setIsLogied] = useState(false);
-  const [userInfo, setUserInfo] = useState({});
+  const setIsLoggedIn = useSetRecoilState(isLoggedInState);
+  const setUserInfo = useSetRecoilState(userInfoState);
+  const isLoggedIn = useRecoilValue(isLoggedInState);
 
   const fetchLogin = async () => {
-    const result = await axios.get('/auth/login/check', {
+    const result = await axiosConfig.get('/auth/login/check', {
       withCredentials: true,
     });
-    console.log(result);
     try {
       if (result.status === 200) {
         console.log(result.data.message);
-        setIsLogied(true);
+        setIsLoggedIn(true);
         setUserInfo(result.data.userInfo);
       }
       if (result.status === 201) {
         console.log(result.data.message);
-        setIsLogied(false);
+        setIsLoggedIn(false);
         setUserInfo({});
       }
     } catch (err) {
@@ -37,32 +47,20 @@ function App() {
     fetchLogin();
   }, []);
   return (
-    <div className='App'>
-      <div className='fixed flex gap-5 p-3'>
-        <div>
-          <Link to={'/'}>홈</Link>
-        </div>
-        <div>
-          <Link to={'/join'}>회원가입</Link>
-        </div>
-
-        <div>
-          {isLoined ? (
-            <button onClick={fetchLogin}>로그아웃</button>
-          ) : (
-            <Link to={'/login'}>로그인</Link>
-          )}
-        </div>
+    <div>
+      <Header />
+      <div className='mt-12'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/mypage' element={<MyPage />} />
+          <Route path='/join' element={<Join />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/serch' element={<Serch />} />
+          <Route path='/detail/:mediaType/:contentId' element={<Detail />} />
+          <Route path='/detail/review/:reviewId' />
+          <Route path='/create/:mediaType/:contentId' element={<Create />} />
+        </Routes>
       </div>
-      <Routes>
-        <Route path='/join' element={<Join />} />
-        <Route
-          path='/login'
-          element={
-            <Login setUserInfo={setUserInfo} setIsLogied={setIsLogied} />
-          }
-        />
-      </Routes>
     </div>
   );
 }

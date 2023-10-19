@@ -1,13 +1,15 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
-import axios from '../api/axios';
+import axiosConfig from '../api/axiosConfig';
 import FormInput from '../components/FormInput';
 import FormHeader from '../components/FormHeader';
 import FormButton from '../components/FormButton';
 import { emailReg, passwordReg } from '../util/Regs';
+import { useNavigate } from 'react-router-dom';
 
 export default function Join() {
+  const navigator = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setContirmPassword] = useState('');
@@ -57,13 +59,14 @@ export default function Join() {
   ];
   const isJoin = async () => {
     try {
-      const result = await axios.post('/auth/join', {
+      const result = await axiosConfig.post('/auth/join', {
         email: email,
         password: password,
         displayName: displayName,
         phoneNumber: phoneNumber,
       });
       console.log('가입요청성공 : ', result.data.message);
+      navigator(`/login`);
     } catch (error) {
       console.log('가입요청실패 : ', error);
     }

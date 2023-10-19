@@ -11,7 +11,7 @@ export default function FormInput({
 }) {
   return (
     <div>
-      <div className='mt-2'>
+      <div className='mt-2 relative'>
         {name === 'phoneNumber' ? (
           <input
             onChange={(e) => {
@@ -27,7 +27,7 @@ export default function FormInput({
             type={type}
             placeholder={placeholder}
             required
-            className='p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+            className='p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6'
           />
         ) : (
           <input
@@ -38,15 +38,20 @@ export default function FormInput({
             type={type}
             placeholder={placeholder}
             required
-            className='p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+            className='p-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6'
           />
         )}
         {name === 'email' ? (
-          <button className='absolute'>메일 인증</button>
+          <button
+            type='button'
+            className='absolute top-1.5 right-3 text-white text-sm rounded-md bg-red-400 w-10 h-6 hover:bg-red-500'
+          >
+            인증
+          </button>
         ) : (
           ''
         )}
-        {name === 'phoneNumber' ? <button>번호 인증</button> : ''}
+        {/* {name === 'phoneNumber' ? <button>번호 인증</button> : ''} */}
       </div>
     </div>
   );
