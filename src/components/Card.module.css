@@ -1,20 +1,18 @@
 /** @format */
 
 .CardStyled {
-  color: black;
   cursor: pointer;
   transition: 0.5s;
 }
 
 .CardStyled:hover {
   transform: scale(1.05);
-  color: black;
 }
 
 .CardStyled:hover::after {
   content: '';
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
   right: 0;

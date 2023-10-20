@@ -62,16 +62,10 @@ export default function Create() {
 
   return (
     <div className='w-full flex flex-col justify-center items-center text-center'>
+      {}
       <div className='w-10/12 sm:w-6/12 flex flex-col justify-center items-center'>
         <h1 className='text-4xl pt-10 pb-5'>{content.title || content.name}</h1>
-        {/* <input
-          onChange={(e) => {
-            setGrade(e.target.value);
-          }}
-          className='text-center'
-          type='text'
-          placeholder='평점'
-        /> */}
+        <p className='text-3xl pb-5'>감상평을 쓰자</p>
         <div className='flex items-center justify-center gap-1'>
           {stars.map((star, i) => {
             return (
@@ -92,7 +86,7 @@ export default function Create() {
         </div>
         <div className='py-5 w-full'>
           <input
-            className='w-full text-center bg-slate-100 p-2 rounded-md'
+            className='w-full text-center text-zinc-900 bg-slate-200 p-2 rounded-md shadow-md'
             placeholder='한줄평 적기 (적어야 됨)'
             type='text'
             value={review}
@@ -103,7 +97,7 @@ export default function Create() {
         </div>
         <div className='w-full py-5'>
           <textarea
-            className='w-full text-center h-80 bg-slate-100 p-2 rounded-md'
+            className='w-full text-center h-80 text-zinc-900 bg-slate-200 p-2 rounded-md shadow-md'
             placeholder='뇌절 하시겠습니까 (안해도 됨)'
             value={addReview}
             onChange={(e) => {

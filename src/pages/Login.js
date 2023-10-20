@@ -17,7 +17,7 @@ export default function Login() {
   const navigator = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const FormITems = [
+  const FormItems = [
     { value: email, setValue: setEmail, type: 'email', placeholder: '이메일' },
     {
       value: password,
@@ -28,14 +28,10 @@ export default function Login() {
   ];
   const isLogin = async () => {
     try {
-      const result = await axiosConfig.post(
-        '/auth/login',
-        {
-          email: email,
-          password: password,
-        },
-        { withCredentials: true }
-      );
+      const result = await axiosConfig.post('/auth/login', {
+        email: email,
+        password: password,
+      });
       console.log('로그인 요청 성공 : ', result);
       if (result.status === 200) {
         setUserInfo(result.data.userInfo);
@@ -52,9 +48,9 @@ export default function Login() {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center'>
-      <FormHeader text={'Login'} />
+      <FormHeader text={'로그인'} />
       <form className='w-5/6 md:w-80 mt-5'>
-        {FormITems.map((el, i) => {
+        {FormItems.map((el, i) => {
           return (
             <FormInput
               key={i}
@@ -65,8 +61,8 @@ export default function Login() {
             />
           );
         })}
-        <FormButton submitFunc={isLogin} text={'Login'} />
-        <FormButton submitFunc={isJoin} text={'Signup'} />
+        <FormButton submitFunc={isLogin} text={'로그인'} />
+        <FormButton submitFunc={isJoin} text={'회원가입'} />
       </form>
     </div>
   );

@@ -14,3 +14,11 @@ export const searchContentsState = atom({
   key: 'searchContentsState',
   default: [],
 });
+export const reviewsState = atom({
+  key: 'reviewsState',
+  default: [],
+});
+export const darkModeState = atom({
+  key: 'darkModeState',
+  default: false,
+});

@@ -6,40 +6,39 @@ import axiosConfig from '../api/axiosConfig';
 import { useNavigate, useParams } from 'react-router-dom';
 import PencilIcon from '../icons/PencilIcon';
 import CardReview from '../components/CardReview';
+import { isLoggedInState, reviewsState } from '../recoilAtoms';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 export default function Detail({}) {
   const navigator = useNavigate();
   const { mediaType, contentId } = useParams();
 
   const [content, setContent] = useState({});
-  const [reviews, setReviews] = useState([]);
+  const isLoggedIn = useRecoilValue(isLoggedInState);
+  const setReviews = useSetRecoilState(reviewsState);
+  const reviews = useRecoilValue(reviewsState);
 
-  const fetchMovie = async () => {
+  const fetchContent = async () => {
     try {
       const result = await tmdbAxiosConfig.get(`/${mediaType}/${contentId}`);
-
       setContent(result.data);
     } catch (err) {
       console.log(err);
     }
   };
   const fetchReview = async () => {
-    const result = await axiosConfig.post(
-      'post/review',
-      { contentType: mediaType, contentId: contentId },
-      {
-        withCredentials: true,
-      }
-    );
+    const result = await axiosConfig.post('post/review', {
+      contentType: mediaType,
+      contentId: contentId,
+    });
     setReviews(result.data.reviews);
-
   };
   useEffect(() => {
-    fetchMovie();
+    fetchContent();
   }, []);
   useEffect(() => {
     fetchReview();
-
+    console.log('reviews : ', reviews);
   }, []);
   return (
     <div className='w-full flex flex-col items-center justify-center gap-5'>
@@ -52,14 +51,23 @@ export default function Detail({}) {
         />
       </div>
       <div className='flex items-center justify-center hover:text-red-400 cursor-pointer gap-2'>
-        <button
-          onClick={(e) => {
-            navigator(`/create/${mediaType}/${contentId}`);
-          }}
-        >
-          {content.title || content.name} 한줄평 쓰기
-        </button>
-        <PencilIcon />
+        {isLoggedIn ? (
+          <button
+            onClick={(e) => {
+              navigator(`/create/${mediaType}/${contentId}`);
+            }}
+          >
+            {content.title || content.name} 한줄평 쓰기 <PencilIcon />
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              navigator('/login');
+            }}
+          >
+            로그인 하고 한줄평 쓰자!
+          </button>
+        )}
       </div>
       <div className='flex overflow-x-scroll gap-3 p-3'>
         {reviews.map((review, i) => {
@@ -67,7 +75,7 @@ export default function Detail({}) {
             <div
               key={i}
               onClick={(e) => {
-                navigator(`/detailreview/${review._id}`);
+                navigator(`/detail/review/${review.userId}/${review._id}`);
               }}
               className='flex gap-1 hover:text-red-400 cursor-pointer relative'
             >

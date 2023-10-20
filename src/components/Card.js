@@ -6,7 +6,7 @@ import styled from './Card.module.css';
 export default function Card({ content }) {
   return (
     <div className={`${styled.CardStyled}`}>
-      <div className={`w-64 h-80 text-center border shadow-md`}>
+      <div className={`w-64 h-80 text-center border rounded-md shadow-md`}>
         <img
           className='w-full h-5/6'
           src={

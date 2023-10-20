@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from 'axios';
+import { TMDMAPIKEY } from '../config';
 
 const instance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',

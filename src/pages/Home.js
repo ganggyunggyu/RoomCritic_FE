@@ -14,12 +14,10 @@ export default function Home() {
   const [reviews, setReviews] = useState([]);
 
   const fetchReview = async () => {
-    const result = await axiosConfig.get('post/review', {
-      withCredentials: true,
-    });
-    console.log(result);
+    const result = await axiosConfig.get('post/review');
     setReviews(result.data.reviews);
   };
+
   useEffect(() => {
     fetchReview();
   }, []);

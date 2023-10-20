@@ -111,7 +111,7 @@ export default function Join() {
 
   return (
     <div className='flex flex-col h-screen justify-center items-center'>
-      <FormHeader text={'Sign up'} />
+      <FormHeader text={'회원가입'} />
       <form className='w-5/6 md:w-80 mt-5'>
         {FormItems.map((el, i) => {
           return (
@@ -128,7 +128,7 @@ export default function Join() {
         <FormButton
           submitFunc={isJoin}
           isSubmitAble={isJoinSubmitAble}
-          text={'Sigb up'}
+          text={'회원가입'}
         />
       </form>
     </div>
