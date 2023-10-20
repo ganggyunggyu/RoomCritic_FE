@@ -1,9 +1,10 @@
 /** @format */
 
 import axios from 'axios';
+import { HOST } from '../config';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: HOST,
   headers: {
     Authorization: 'Bearer your-token',
   },
