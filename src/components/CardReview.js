@@ -16,7 +16,7 @@ export default function CardReview({ content }) {
       className={`${styled.CardStyled}`}
     >
       {cardHover ? (
-        <p className={`${styled.CardReview} absolute z-10 text-white`}>
+        <p className={`${styled.CardReview} absolute z-10 text-white p-1`}>
           {content.review}
         </p>
       ) : null}

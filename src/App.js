@@ -29,6 +29,7 @@ function App() {
   const setDarkMode = useSetRecoilState(darkModeState);
 
   const darkMode = useRecoilValue(darkModeState);
+  const userInfo = useRecoilValue(userInfoState);
   const isLoggedIn = useRecoilValue(isLoggedInState);
 
   const fetchLogin = async () => {
@@ -37,9 +38,11 @@ function App() {
         withCredentials: true,
       });
       if (result.status === 200) {
-        console.log(result.data.message);
         setIsLoggedIn(true);
         setUserInfo(result.data.userInfo);
+        console.log(result.data.message);
+        console.log(result.data.userInfo);
+        console.log(userInfo);
       }
       if (result.status === 201) {
         console.log(result.data.message);

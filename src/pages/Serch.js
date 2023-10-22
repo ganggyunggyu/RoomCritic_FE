@@ -36,7 +36,7 @@ export default function Serch() {
     <div className='flex flex-col items-center justify-center gap-5 pt-5'>
       <div className='w-11/12 sm:w-96 relative'>
         <input
-          className='border focus:border-red-400 focus:bg-slate-50 w-full p-3 rounded-md'
+          className='border focus:border-red-400 focus:bg-slate-50 w-full p-3 rounded-md text-zinc-900'
           type='text'
           onChange={(e) => {
             setSerchValue(e.target.value);

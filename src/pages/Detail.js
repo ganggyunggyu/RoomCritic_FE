@@ -53,6 +53,7 @@ export default function Detail({}) {
       <div className='flex items-center justify-center hover:text-red-400 cursor-pointer gap-2'>
         {isLoggedIn ? (
           <button
+            className='flex justify-center items-center gap-2'
             onClick={(e) => {
               navigator(`/create/${mediaType}/${contentId}`);
             }}
