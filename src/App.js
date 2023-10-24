@@ -4,10 +4,10 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
 import axiosConfig from './api/axiosConfig';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { userInfoState, isLoggedInState, darkModeState } from './recoilAtoms';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { useRecoilValue } from 'recoil';
 
 import Header from './components/Header';
@@ -24,13 +24,9 @@ import Sun from './icons/Sun';
 import Moon from './icons/Moon';
 
 function App() {
-  const setIsLoggedIn = useSetRecoilState(isLoggedInState);
-  const setUserInfo = useSetRecoilState(userInfoState);
-  const setDarkMode = useSetRecoilState(darkModeState);
-
-  const darkMode = useRecoilValue(darkModeState);
-  const userInfo = useRecoilValue(userInfoState);
-  const isLoggedIn = useRecoilValue(isLoggedInState);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [darkMode, setDarkMode] = useRecoilState(darkModeState);
 
   const fetchLogin = async () => {
     try {
@@ -40,9 +36,7 @@ function App() {
       if (result.status === 200) {
         setIsLoggedIn(true);
         setUserInfo(result.data.userInfo);
-        console.log(result.data.message);
-        console.log(result.data.userInfo);
-        console.log(userInfo);
+        console.log('userInfo : ', userInfo);
       }
       if (result.status === 201) {
         console.log(result.data.message);
@@ -59,7 +53,7 @@ function App() {
 
   useEffect(() => {
     fetchLogin();
-  }, []);
+  }, [setUserInfo]);
 
   return (
     <div

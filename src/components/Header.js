@@ -5,11 +5,21 @@ import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { darkModeState, isLoggedInState, userInfoState } from '../recoilAtoms';
 import SerchIcon from '../icons/SerchIcon';
+import axiosConfig from '../api/axiosConfig';
 
 export default function Header() {
   const userInfo = useRecoilValue(userInfoState);
   const isLoggedIn = useRecoilValue(isLoggedInState);
   const darkMode = useRecoilValue(darkModeState);
+
+  const isLogout = async () => {
+    try {
+      const result = await axiosConfig.post('auth/logout');
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <header
@@ -29,6 +39,9 @@ export default function Header() {
           {isLoggedIn ? (
             <div className='flex gap-3 items-center justify-center'>
               <Link to={'/mypage'}>{userInfo.displayName} 평론가</Link>
+              <button onClick={isLogout} className='hover:text-red-400'>
+                로그아웃
+              </button>
               <Link to={'/serch'}>
                 <SerchIcon />
               </Link>

@@ -20,7 +20,7 @@ export default function Create() {
 
   const sendReview = async () => {
     const reviewData = {
-      userId: userInfo.id,
+      userId: userInfo._id,
       userName: userInfo.displayName,
       review: review,
       addReview: addReview,
@@ -59,6 +59,7 @@ export default function Create() {
   const isGrade = (star) => {
     setGrade(star);
   };
+  console.log(userInfo);
 
   return (
     <div className='w-full flex flex-col justify-center items-center text-center'>
