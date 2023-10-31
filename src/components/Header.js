@@ -1,25 +1,31 @@
 /** @format */
 
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { darkModeState, isLoggedInState, userInfoState } from '../recoilAtoms';
 import SerchIcon from '../icons/SerchIcon';
 import axiosConfig from '../api/axiosConfig';
 
 export default function Header() {
+  const navigator = useNavigate();
   const userInfo = useRecoilValue(userInfoState);
   const isLoggedIn = useRecoilValue(isLoggedInState);
   const darkMode = useRecoilValue(darkModeState);
+  console.log(userInfo);
 
   const isLogout = async () => {
     try {
-      const result = await axiosConfig.post('auth/logout');
-      console.log(result);
+      const result = await axiosConfig.get('auth/logout');
+      if (result.status === 200) {
+        window.location.reload();
+        //수정 필요
+      }
     } catch (err) {
       console.log(err);
     }
   };
+  // useEffect(() => {}, [isLoggedIn]);
 
   return (
     <header

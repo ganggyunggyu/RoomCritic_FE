@@ -18,6 +18,9 @@ export default function Home() {
     const result = await axiosConfig.get('post/review');
     setReviews(result.data.reviews);
   };
+  const isDetailReview = (content) => {
+    navigator(`/detail/${content.media_type}/${content.id}`);
+  };
 
   useEffect(() => {
     fetchReview();
@@ -25,6 +28,7 @@ export default function Home() {
   return (
     <div className='flex flex-col items-center justify-center'>
       <Banner />
+
       {isLoggedIn && searchContentsValue.length !== 0 ? (
         <div className='w-11/12 pt-10'>
           <h1 className='pb-5 text-xl'>
@@ -33,14 +37,13 @@ export default function Home() {
           <div className='flex overflow-x-scroll gap-3 p-3'>
             {searchContentsValue.map((content, i) => {
               return (
-                <div
-                  onClick={() => {
-                    navigator(`/detail/${content.media_type}/${content.id}`);
-                  }}
+                <Card
                   key={i}
-                >
-                  <Card content={content} />
-                </div>
+                  content={content}
+                  onClick={() => {
+                    isDetailReview(content);
+                  }}
+                />
               );
             })}
           </div>

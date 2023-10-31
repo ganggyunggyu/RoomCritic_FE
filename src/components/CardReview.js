@@ -3,14 +3,14 @@
 import React, { useState } from 'react';
 import styled from './Card.module.css';
 
-export default function CardReview({ content }) {
+export default function CardReview({ content, onClick }) {
   const [cardHover, setCardHover] = useState(false);
   const cardMouseOver = () => {
-    console.log('asd');
     setCardHover(true);
   };
   return (
     <div
+      onClick={onClick}
       onMouseOver={cardMouseOver}
       onMouseLeave={() => setCardHover(false)}
       className={`${styled.CardStyled}`}

@@ -20,8 +20,7 @@ import Detail from './pages/Detail';
 import Create from './pages/Create';
 import DetailReview from './pages/DetailReview';
 import Footer from './components/Footer';
-import Sun from './icons/Sun';
-import Moon from './icons/Moon';
+import DarkModeButton from './components/DarkModeButton';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
@@ -33,9 +32,10 @@ function App() {
       const result = await axiosConfig.get('/auth/login/check', {
         withCredentials: true,
       });
+      console.log(result);
       if (result.status === 200) {
         setIsLoggedIn(true);
-        setUserInfo(result.data.userInfo);
+        setUserInfo(result.data.userInfo.user);
         console.log('userInfo : ', userInfo);
       }
       if (result.status === 201) {
@@ -49,11 +49,15 @@ function App() {
   };
   const isDarkModeSwitch = () => {
     setDarkMode(!darkMode);
+    localStorage.setItem('darkMode', darkMode);
   };
 
   useEffect(() => {
+    console.log(localStorage.getItem('darkMode'));
+    setDarkMode(localStorage.getItem('darkMode'));
     fetchLogin();
-  }, [setUserInfo]);
+    console.log(darkMode);
+  }, []);
 
   return (
     <div
@@ -76,12 +80,7 @@ function App() {
         </Routes>
       </div>
       <Footer />
-      <button
-        onClick={isDarkModeSwitch}
-        className='h-12 w-12 border rounded-full flex items-center justify-center fixed bottom-8 right-8'
-      >
-        {darkMode ? <Sun /> : <Moon />}
-      </button>
+      <DarkModeButton darkMode={darkMode} isDarkModeSwitch={isDarkModeSwitch} />
     </div>
   );
 }

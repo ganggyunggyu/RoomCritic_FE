@@ -73,15 +73,13 @@ export default function Detail({}) {
       <div className='flex overflow-x-scroll gap-3 p-3'>
         {reviews.map((review, i) => {
           return (
-            <div
+            <CardReview
               key={i}
+              content={review}
               onClick={(e) => {
                 navigator(`/detail/review/${review.userId}/${review._id}`);
               }}
-              className='flex gap-1 hover:text-red-400 cursor-pointer relative'
-            >
-              <CardReview content={review} />
-            </div>
+            />
           );
         })}
       </div>

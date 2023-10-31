@@ -27,6 +27,10 @@ export default function Serch() {
     console.log(result.data.results);
     setSerchContents(result.data.results);
   };
+
+  const isDetailReview = (content) => {
+    navigator(`/detail/${content.media_type}/${content.id}`);
+  };
   // useEffect(() => {
   //   fetchSearchMovie();
   //   console.log(searchValue);
@@ -59,14 +63,13 @@ export default function Serch() {
       <div className='w-11/12 flex flex-wrap items-center justify-center gap-3'>
         {searchContents.map((content, i) => {
           return (
-            <div
-              onClick={() => {
-                navigator(`/detail/${content.media_type}/${content.id}`);
-              }}
+            <Card
               key={i}
-            >
-              <Card content={content} />
-            </div>
+              content={content}
+              onClick={() => {
+                isDetailReview(content);
+              }}
+            />
           );
         })}
       </div>

@@ -20,8 +20,10 @@ export default function DetailReview() {
 
   useEffect(() => {
     isReviewSelet();
+    console.log(reviews);
     console.log(selectReview);
   }, []);
+
   return (
     <div>
       <h1
