@@ -18,6 +18,10 @@ export const reviewsState = atom({
   key: 'reviewsState',
   default: [],
 });
+export const seletReview = atom({
+  key: 'seletReview',
+  default: {},
+});
 export const darkModeState = atom({
   key: 'darkModeState',
   default: false,
