@@ -22,7 +22,7 @@ export default function CardReview({ content, onClick }) {
       ) : null}
 
       <div className={`w-64 h-80 text-center border shadow-md`}>
-        <img className='w-full h-5/6' src={content.contentImg} />
+        <img className='w-full h-5/6' src={content.contentPosterImg} />
         <div className='p-3'>
           <p>
             {content.userName} 평론가님의{' '}

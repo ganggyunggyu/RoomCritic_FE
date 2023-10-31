@@ -10,7 +10,7 @@ export default function Card({ content, onClick }) {
         <img
           className='w-full h-5/6'
           src={
-            content.contentImg ||
+            content.contentPosterImg ||
             `https://www.themoviedb.org/t/p/original${
               content.poster_path || content.backdrop_path
             }`

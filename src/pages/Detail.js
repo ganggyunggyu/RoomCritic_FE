@@ -47,7 +47,7 @@ export default function Detail({}) {
         <img
           className='w-full h-full'
           src={`https://www.themoviedb.org/t/p/original/${content.poster_path}`}
-          alt=''
+          alt='movie_poster'
         />
       </div>
       <div className='flex items-center justify-center hover:text-red-400 cursor-pointer gap-2'>
