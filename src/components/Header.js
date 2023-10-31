@@ -44,7 +44,9 @@ export default function Header() {
         <div>
           {isLoggedIn ? (
             <div className='flex gap-3 items-center justify-center'>
-              <Link to={'/mypage'}>{userInfo.displayName} 평론가</Link>
+              <Link to={`/mypage/${userInfo._id}`}>
+                {userInfo.displayName} 평론가
+              </Link>
               <button onClick={isLogout} className='hover:text-red-400'>
                 로그아웃
               </button>
