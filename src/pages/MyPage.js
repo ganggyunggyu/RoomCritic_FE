@@ -7,22 +7,18 @@ import { useRecoilValue } from 'recoil';
 import { useRecoilState } from 'recoil';
 
 import CardReview from '../components/CardReview';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { reviewsState } from '../recoilAtoms';
 
 export default function MyPage() {
+  const { userId } = useParams();
   const navigator = useNavigate();
   const userInfo = useRecoilValue(userInfoState);
   const [reviews, setReviews] = useRecoilState(reviewsState);
-  const [myReviews, setMyReviews] = useState([]);
   const fetchReview = async () => {
-    const result = await axiosConfig.post(
-      `post/myreview`,
-      {
-        userId: userInfo._id,
-      },
-      { withCredentials: true }
-    );
+    const result = await axiosConfig.get(`post/myreview/${userId}`, {
+      withCredentials: true,
+    });
     setReviews(result.data.reviews);
   };
 
@@ -33,7 +29,7 @@ export default function MyPage() {
   return (
     <div className=''>
       <div className='flex flex-col items-center justify-center p-10'>
-        <p>나 {userInfo.displayName}이 쓴 리뷰들</p>
+        <p className='pb-10'>나 {userInfo.displayName}이 쓴 리뷰들</p>
         <div className='flex w-11/12 overflow-x-scroll gap-3 p-3'>
           {reviews.map((review, i) => {
             return (
