@@ -3,6 +3,7 @@
 .CardStyled {
   cursor: pointer;
   transition: 0.5s;
+  border-radius: 20px;
 }
 
 .CardStyled:hover {
