@@ -36,7 +36,6 @@ function App() {
       if (result.status === 200) {
         setIsLoggedIn(true);
         setUserInfo(result.data.userInfo.user);
-        console.log('userInfo : ', userInfo);
       }
       if (result.status === 201) {
         console.log(result.data.message);
@@ -49,14 +48,12 @@ function App() {
   };
   const isDarkModeSwitch = () => {
     setDarkMode(!darkMode);
-    localStorage.setItem('darkMode', darkMode);
+    localStorage.setItem('darkMode', !darkMode);
   };
 
   useEffect(() => {
-    console.log(localStorage.getItem('darkMode'));
-    setDarkMode(localStorage.getItem('darkMode'));
+    setDarkMode(JSON.parse(localStorage.getItem('darkMode')));
     fetchLogin();
-    console.log(darkMode);
   }, []);
 
   return (
@@ -67,7 +64,7 @@ function App() {
       <div className='mt-12'>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/mypage' element={<MyPage />} />
+          <Route path='/mypage/:userId' element={<MyPage />} />
           <Route path='/join' element={<Join />} />
           <Route path='/login' element={<Login />} />
           <Route path='/serch' element={<Serch />} />
