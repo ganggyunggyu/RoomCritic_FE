@@ -31,10 +31,10 @@ export default function Serch() {
   const isDetailReview = (content) => {
     navigator(`/detail/${content.media_type}/${content.id}`);
   };
-  // useEffect(() => {
-  //   fetchSearchMovie();
-  //   console.log(searchValue);
-  // }, [searchValue]);
+  useEffect(() => {
+    fetchSearchMovie();
+    console.log(searchValue);
+  }, [searchValue]);
 
   return (
     <div className='flex flex-col items-center justify-center gap-5 pt-5'>
@@ -42,6 +42,7 @@ export default function Serch() {
         <input
           className='border focus:border-red-400 focus:bg-slate-50 w-full p-3 rounded-md text-zinc-900'
           type='text'
+          placeholder='작품명을 검색해봐요!'
           onChange={(e) => {
             setSerchValue(e.target.value);
           }}
@@ -55,7 +56,7 @@ export default function Serch() {
         <button
           onClick={fetchSearchMovie}
           type='button'
-          className='absolute top-3 right-3 text-white text-sm rounded-md bg-red-400 w-10 h-6 hover:bg-red-500 z-10 flex items-center justify-center'
+          className='absolute top-3 right-3 text-white text-sm rounded-md bg-red-400 w-10 h-6 hover:bg-red-500 flex items-center justify-center'
         >
           <SerchIcon />
         </button>
