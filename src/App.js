@@ -56,6 +56,16 @@ function App() {
     fetchLogin();
   }, []);
 
+  useEffect(() => {
+    if (darkMode) {
+      document.body.style.backgroundColor = '#27272A';
+      document.body.style.color = 'white';
+    } else {
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color = '#27272A';
+    }
+  }, [darkMode]);
+
   return (
     <div
       className={`${darkMode ? 'bg-zinc-800 text-white' : ''} transition-all`}
