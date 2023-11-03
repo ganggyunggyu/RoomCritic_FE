@@ -7,6 +7,7 @@ import { reviewsState } from '../recoilAtoms';
 import { seletReview } from '../recoilAtoms';
 import { useRecoilState } from 'recoil';
 import axiosConfig from '../api/axiosConfig';
+import { formatDateWithTime } from '../util/Regs';
 
 export default function DetailReview() {
   const reviews = useRecoilValue(reviewsState);
@@ -36,31 +37,36 @@ export default function DetailReview() {
 
   useEffect(() => {
     isReviewSelet();
+    console.log(formatDateWithTime(selectReview.createTime));
   }, []);
 
   return (
-    <div className='flex flex-col items-center justify-center gap-10 pt-10'>
-      <img
-        className='w-8/12'
-        src={
-          selectReview.contentBackdropImg ||
-          selectReview.contentPosterImg ||
-          selectReview.contentImg
-        }
-        alt=''
-      />
-      <h1
-        onClick={() => {
-          console.log(selectReview);
-        }}
-      >
-        영화 제목 : {selectReview.contentName}
-      </h1>
-      <p>{selectReview.userName} 평론가의 리뷰</p>
-      <p>글 쓴 시간 : {selectReview.createTime}</p>
-      <p>한줄평 : {selectReview.review}</p>
-      <p>그 외 .. : {selectReview.addReview}</p>
-      <p>{selectReview.grade}점드립니다</p>
+    <div className="md:w-full md:flex-row gap-10 pt-10 flex items-center justify-center">
+      <div className="w-10/12 flex flex-col md:flex-row justify-center gap-10">
+        <img
+          className="w-full md:w-6/12 "
+          src={
+            selectReview.contentBackdropImg ||
+            selectReview.contentPosterImg ||
+            selectReview.contentImg
+          }
+          alt=""
+        />
+        <div className="w-full md:w-6/12 flex flex-col gap-5 justify-start items-center p-3">
+          <h1
+            onClick={() => {
+              console.log(selectReview);
+            }}
+          >
+            {selectReview.contentName}
+          </h1>
+          <p>{selectReview.userName} 평론가의 리뷰</p>
+          <p>{formatDateWithTime(selectReview.createTime)}</p>
+          <p>{selectReview.review}</p>
+          <p>{selectReview.addReview}</p>
+          <p>평점은 {selectReview.grade}점 드립니다</p>
+        </div>
+      </div>
     </div>
   );
 }
