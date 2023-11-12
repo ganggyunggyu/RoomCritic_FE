@@ -5,43 +5,39 @@ import { useNavigate, useParams } from 'react-router-dom';
 import PencilIcon from '../icons/PencilIcon';
 import CardReview from '../components/CardReview';
 import { isLoggedInState, reviewsState } from '../recoilAtoms';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import useContentFetch from '../hooks/useContentFetch';
 
 export default function Detail() {
   const navigator = useNavigate();
   const { mediaType, contentId } = useParams();
+  const { content, fetchContent } = useContentFetch(mediaType, contentId);
 
-  const [content, setContent] = useState({});
   const isLoggedIn = useRecoilValue(isLoggedInState);
-  const setReviews = useSetRecoilState(reviewsState);
-  const reviews = useRecoilValue(reviewsState);
+
+  const [reviews, setReviews] = useRecoilState(reviewsState);
+  const fetchReview = async () => {
+    const result = await axiosConfig.post('post/review', {
+      contentType: mediaType,
+      contentId: contentId,
+    });
+    setReviews(result.data.reviews);
+  };
 
   useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const result = await tmdbAxiosConfig.get(`/${mediaType}/${contentId}`);
-        setContent(result.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchContent();
-    const fetchReview = async () => {
-      const result = await axiosConfig.post('post/review', {
-        contentType: mediaType,
-        contentId: contentId,
-      });
-      setReviews(result.data.reviews);
-    };
     fetchReview();
-  }, [mediaType, contentId, setReviews]);
+  }, []);
+
+  useEffect(() => {
+    fetchContent();
+  }, []);
 
   return (
     <div className="w-full flex flex-col items-center justify-center gap-5 pt-10">
       <div className="h-84 w-7/12 max-w-fit flex flex-col items-center md:items-start md:flex-row gap-10">
         <img
           className="w-full md:w-6/12 max-h-fit"
-          src={`https://www.themoviedb.org/t/p/original/${content.poster_path}`}
+          src={`https://www.themoviedb.org/t/p/original${content.poster_path}`}
           alt="movie_poster"
         />
         <div className="flex flex-col items-center md:items-start gap-5 w-full md:w-6/12">

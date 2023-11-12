@@ -1,4 +1,3 @@
-/** @format */
 import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
@@ -7,7 +6,7 @@ import axiosConfig from './api/axiosConfig';
 import { useEffect, useState } from 'react';
 
 import { userInfoState, isLoggedInState, darkModeState } from './recoilAtoms';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { useRecoilValue } from 'recoil';
 
 import Header from './components/Header';
@@ -21,73 +20,37 @@ import Create from './pages/Create';
 import DetailReview from './pages/DetailReview';
 import Footer from './components/Footer';
 import DarkModeButton from './components/DarkModeButton';
+import KakaoLogin from './pages/KakaoLogin';
+
+import useDarkMode from './hooks/useDarkMode';
+import useLoginFetch from './hooks/useLoginFetch';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-  const [darkMode, setDarkMode] = useRecoilState(darkModeState);
-
-  const fetchLogin = async () => {
-    try {
-      const result = await axiosConfig.get('/auth/login/check', {
-        withCredentials: true,
-      });
-      console.log(result);
-      if (result.status === 200) {
-        setIsLoggedIn(true);
-        setUserInfo(result.data.userInfo.user);
-      }
-      if (result.status === 201) {
-        console.log(result.data.message);
-        setIsLoggedIn(false);
-        setUserInfo({});
-      }
-    } catch (err) {
-      console('fetchLoginERROR !!', err);
-    }
-  };
-  const isDarkModeSwitch = () => {
-    setDarkMode(!darkMode);
-    localStorage.setItem('darkMode', !darkMode);
-  };
+  const { darkMode, toggleDarkMode } = useDarkMode();
+  const { fetchLogin } = useLoginFetch();
 
   useEffect(() => {
-    setDarkMode(JSON.parse(localStorage.getItem('darkMode')));
     fetchLogin();
   }, []);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.body.style.backgroundColor = '#27272A';
-      document.body.style.color = 'white';
-    } else {
-      document.body.style.backgroundColor = 'white';
-      document.body.style.color = '#27272A';
-    }
-  }, [darkMode]);
-
   return (
-    <div
-      className={`${darkMode ? 'bg-zinc-800 text-white' : ''} transition-all`}
-    >
+    <div className={`${darkMode ? 'bg-zinc-800 text-white' : ''} transition-all`}>
       <Header />
-      <div className='mt-12'>
+      <div className="mt-12">
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/mypage/:userId' element={<MyPage />} />
-          <Route path='/join' element={<Join />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/serch' element={<Serch />} />
-          <Route path='/detail/:mediaType/:contentId' element={<Detail />} />
-          <Route
-            path='/detail/review/:userId/:reviewId'
-            element={<DetailReview />}
-          />
-          <Route path='/create/:mediaType/:contentId' element={<Create />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/mypage/:userId" element={<MyPage />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/serch" element={<Serch />} />
+          <Route path="/detail/:mediaType/:contentId" element={<Detail />} />
+          <Route path="/detail/review/:userId/:reviewId" element={<DetailReview />} />
+          <Route path="/create/:mediaType/:contentId" element={<Create />} />
+          <Route path="/auth" element={<KakaoLogin />} />
         </Routes>
       </div>
       <Footer />
-      <DarkModeButton darkMode={darkMode} isDarkModeSwitch={isDarkModeSwitch} />
+      <DarkModeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
     </div>
   );
 }
