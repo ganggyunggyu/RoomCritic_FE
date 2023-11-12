@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect, useState } from 'react';
 import Banner from '../components/Banner';
 import { searchContentsState, isLoggedInState } from '../recoilAtoms';
@@ -26,15 +24,15 @@ export default function Home() {
     fetchReview();
   }, []);
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className="flex flex-col items-center justify-center">
       <Banner />
 
       {isLoggedIn && searchContentsValue.length !== 0 ? (
-        <div className='w-11/12 pt-10'>
-          <h1 className='pb-5 text-xl'>
-            최근 검색한 <span className='text-red-400'>작품</span>
+        <div className="w-11/12 pt-10">
+          <h1 className="pb-5 text-xl">
+            최근 검색한 <span className="text-red-400">작품</span>
           </h1>
-          <div className='flex overflow-x-scroll gap-3 p-3'>
+          <div className="flex overflow-x-scroll gap-3 p-3">
             {searchContentsValue.map((content, i) => {
               return (
                 <Card
@@ -50,18 +48,16 @@ export default function Home() {
         </div>
       ) : null}
 
-      <div className='w-11/12 pt-10'>
-        <h1 className='pb-5 text-xl'>
-          최근 리부가 남겨진 <span className='text-red-400'>작품</span>
+      <div className="w-11/12 pt-10">
+        <h1 className="pb-5 text-xl">
+          최근 리부가 남겨진 <span className="text-red-400">작품</span>
         </h1>
-        <div className='flex overflow-x-scroll gap-3 p-3'>
+        <div className="flex overflow-x-scroll gap-3 p-3">
           {reviews.map((content, i) => {
             return (
               <div
                 onClick={() => {
-                  navigator(
-                    `/detail/${content.contentType}/${content.contentId}`
-                  );
+                  navigator(`/detail/${content.contentType}/${content.contentId}`);
                 }}
                 key={i}
               >

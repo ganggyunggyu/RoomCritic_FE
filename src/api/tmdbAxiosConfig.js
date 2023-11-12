@@ -1,5 +1,3 @@
-/** @format */
-
 import axios from 'axios';
 import { TMDMAPIKEY } from '../config';
 

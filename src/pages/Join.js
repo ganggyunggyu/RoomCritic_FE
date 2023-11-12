@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect, useState } from 'react';
 import axiosConfig from '../api/axiosConfig';
 import FormInput from '../components/FormInput';
@@ -94,25 +92,15 @@ export default function Join() {
 
   useEffect(() => {
     setIsJoinSubmitAble(
-      isEmailReg &&
-        isPasswordReg &&
-        isPasswordMatch &&
-        isPhoneNumberCheck &&
-        isTrim(displayName)
+      isEmailReg && isPasswordReg && isPasswordMatch && isPhoneNumberCheck && isTrim(displayName),
     );
     console.log('회원가입 조건 적합 : ', isJoinSubmitAble);
-  }, [
-    isEmailReg,
-    isPasswordReg,
-    isPasswordMatch,
-    isPhoneNumberCheck,
-    displayName,
-  ]);
+  }, [isEmailReg, isPasswordReg, isPasswordMatch, isPhoneNumberCheck, displayName]);
 
   return (
-    <div className='flex flex-col h-screen justify-center items-center'>
+    <div className="flex flex-col h-screen justify-center items-center">
       <FormHeader text={'회원가입'} />
-      <form className='w-5/6 md:w-80 mt-5'>
+      <form className="w-5/6 md:w-80 mt-5">
         {FormItems.map((el, i) => {
           return (
             <FormInput
@@ -125,11 +113,7 @@ export default function Join() {
             />
           );
         })}
-        <FormButton
-          submitFunc={isJoin}
-          isSubmitAble={isJoinSubmitAble}
-          text={'회원가입'}
-        />
+        <FormButton submitFunc={isJoin} isSubmitAble={isJoinSubmitAble} text={'회원가입'} />
       </form>
     </div>
   );

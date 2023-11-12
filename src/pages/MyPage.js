@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect, useState } from 'react';
 import axiosConfig from '../api/axiosConfig';
 import { userInfoState } from '../recoilAtoms';
@@ -27,10 +25,10 @@ export default function MyPage() {
   }, []);
 
   return (
-    <div className=''>
-      <div className='flex flex-col items-center justify-center p-10'>
-        <p className='pb-10'>나 {userInfo.displayName}이 쓴 리뷰들</p>
-        <div className='flex w-11/12 overflow-x-scroll gap-3 p-3'>
+    <div className="">
+      <div className="flex flex-col items-center justify-center p-10">
+        <p className="pb-10">나 {userInfo.displayName}이 쓴 리뷰들</p>
+        <div className="flex w-11/12 overflow-x-scroll gap-3 p-3">
           {reviews.map((review, i) => {
             return (
               <CardReview

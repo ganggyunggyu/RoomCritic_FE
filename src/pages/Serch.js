@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useDeferredValue, useEffect, useState, useTransition } from 'react';
 import tmdbAxiosConfig from '../api/tmdbAxiosConfig';
 import Card from '../components/Card';
