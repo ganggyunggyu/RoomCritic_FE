@@ -1,13 +1,7 @@
 import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
-
-import axiosConfig from './api/axiosConfig';
-import { useEffect, useState } from 'react';
-
-import { userInfoState, isLoggedInState, darkModeState } from './recoilAtoms';
-import { useSetRecoilState } from 'recoil';
-import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
 
 import Header from './components/Header';
 import Join from './pages/Join';
@@ -21,13 +15,12 @@ import DetailReview from './pages/DetailReview';
 import Footer from './components/Footer';
 import DarkModeButton from './components/DarkModeButton';
 import KakaoLogin from './pages/KakaoLogin';
-
 import useDarkMode from './hooks/useDarkMode';
-import useLoginFetch from './hooks/useLoginFetch';
+import useLogin from './hooks/useLogin';
 
 function App() {
   const { darkMode, toggleDarkMode } = useDarkMode();
-  const { fetchLogin } = useLoginFetch();
+  const { fetchLogin } = useLogin();
 
   useEffect(() => {
     fetchLogin();
