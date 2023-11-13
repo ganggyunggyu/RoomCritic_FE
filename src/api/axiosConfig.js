@@ -6,7 +6,7 @@ const instance = axios.create({
   headers: {
     Authorization: 'Bearer your-token',
   },
-  withCredentials: true, // withCredentials를 true로 설정
+  withCredentials: true,
 });
 
 export default instance;
