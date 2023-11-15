@@ -52,10 +52,10 @@ export default function Header() {
             </div>
           ) : (
             <div className="flex gap-5">
-              <div className="hover:text-red-400">
+              <div className="hover:text-red-400 transition-all">
                 <Link to={'/login'}>로그인</Link>
               </div>
-              <div className="hover:text-red-400">
+              <div className="hover:text-red-400 transition-all">
                 <Link to={'/join'}>회원가입</Link>
               </div>
             </div>
