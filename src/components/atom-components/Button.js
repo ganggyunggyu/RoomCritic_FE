@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '../../util/cn';
 import { cva } from 'class-variance-authority';
 export const ButtonVariants = cva(
-  `flex justify-center items-center rounded-md py-2 px-1 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600`,
+  `flex justify-center items-center rounded-md py-2 px-1 text-sm font-semibold transition-all shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600`,
   {
     variants: {
       bg: {
@@ -22,7 +22,7 @@ export const ButtonVariants = cva(
       },
       position: {
         default: ``,
-        inInput: `absolute right-3 top-1`,
+        inInput: `absolute right-3 top-1.5 w-8`,
       },
     },
     defaultVariants: {
