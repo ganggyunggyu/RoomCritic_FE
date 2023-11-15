@@ -1,120 +1,101 @@
 import React, { useEffect, useState } from 'react';
-import axiosConfig from '../api/axiosConfig';
-import FormInput from '../components/FormInput';
+
+import Input from '../components/atom-components/Input';
 import FormHeader from '../components/FormHeader';
-import FormButton from '../components/FormButton';
-import { emailReg, passwordReg } from '../util/Regs';
-import { useNavigate } from 'react-router-dom';
+import Button from '../components/atom-components/Button';
+import WrapProvider from '../components/wraper-components/WrapProvider';
+
+import useReg from '../hooks/useReg';
+import useJoin from '../hooks/useJoin';
 
 export default function Join() {
-  const navigator = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setContirmPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const [isPasswordReg, setIsPasswordReg] = useState(false);
-  const [isPasswordMatch, setIsPasswordMatch] = useState(false);
-  const [isEmailReg, setIsEmailReg] = useState(false);
-  const [isPhoneNumberCheck, setIsPhoneNumberCheck] = useState(false);
+  const isEmailReg = useReg(email, 'email');
+  const isPasswordReg = useReg(password, 'password');
+  const isPhoneNumberReg = useReg(phoneNumber, 'phoneNumber');
+  const isDisplayName = useReg(displayName, 'trim');
+  const isConfirmPassword = useReg(password, 'same', confirmPassword);
 
-  const [isJoinSubmitAble, setIsJoinSubmitAble] = useState(false);
+  const [isJoinAble, setIsJoinAble] = useState(false);
+  const { submitJoin, data } = useJoin({
+    email: email,
+    password: password,
+    displayName: displayName,
+    phoneNumber: phoneNumber,
+  });
+
+  useEffect(() => {
+    setIsJoinAble(
+      isEmailReg && isPasswordReg && isPhoneNumberReg && isDisplayName && isConfirmPassword,
+    );
+  }, [isEmailReg, isPasswordReg, isPhoneNumberReg, isDisplayName, isConfirmPassword]);
 
   const FormItems = [
     {
       value: email,
       setValue: setEmail,
       type: 'email',
-      placeholder: '이메일을 입력해주세요',
+      placeholder: '이메일',
       name: 'email',
     },
     {
       value: password,
       setValue: setPassword,
       type: 'password',
-      placeholder: '비밀번호를 입력해주세요',
+      placeholder: '영문 숫자 특수기호 조합 8자리 이상',
     },
     {
       value: confirmPassword,
       setValue: setContirmPassword,
       type: 'password',
-      placeholder: '비밀번호 확인',
+      placeholder: '비밀번호를 한번 더 입력해주세요',
     },
     {
       value: displayName,
       setValue: setDisplayName,
       type: 'text',
-      placeholder: '이름을 입력해주세요',
+      placeholder: '이름',
     },
     {
       value: phoneNumber,
       setValue: setPhoneNumber,
       type: 'text',
-      placeholder: '전화번호를 입력해주세요',
+      placeholder: '전화번호',
       name: 'phoneNumber',
     },
   ];
-  const isJoin = async () => {
-    try {
-      const result = await axiosConfig.post('/auth/join', {
-        email: email,
-        password: password,
-        displayName: displayName,
-        phoneNumber: phoneNumber,
-      });
-      console.log('가입요청성공 : ', result.data.message);
-      navigator(`/login`);
-    } catch (error) {
-      console.log('가입요청실패 : ', error);
-    }
-  };
-
-  const isTrim = (value) => {
-    return !!value.trim();
-  };
-
-  useEffect(() => {
-    setIsPasswordReg(passwordReg.test(password));
-    setIsPasswordMatch(password === confirmPassword);
-  }, [password, confirmPassword]);
-
-  useEffect(() => {
-    setIsEmailReg(emailReg.test(email));
-  }, [email]);
-  useEffect(() => {
-    if (phoneNumber.length === 13) {
-      setIsPhoneNumberCheck(true);
-    } else {
-      setIsPhoneNumberCheck(false);
-    }
-  }, [phoneNumber]);
-
-  useEffect(() => {
-    setIsJoinSubmitAble(
-      isEmailReg && isPasswordReg && isPasswordMatch && isPhoneNumberCheck && isTrim(displayName),
-    );
-    console.log('회원가입 조건 적합 : ', isJoinSubmitAble);
-  }, [isEmailReg, isPasswordReg, isPasswordMatch, isPhoneNumberCheck, displayName]);
 
   return (
-    <div className="flex flex-col h-screen justify-center items-center">
+    <WrapProvider type={'wrap'}>
       <FormHeader text={'회원가입'} />
-      <form className="w-5/6 md:w-80 mt-5">
+      <WrapProvider type={'form'}>
         {FormItems.map((el, i) => {
           return (
-            <FormInput
+            <Input
               key={i}
               value={el.value}
               setValue={el.setValue}
               type={el.type}
               placeholder={el.placeholder}
               name={el.name}
+              size={'wfull'}
             />
           );
         })}
-        <FormButton submitFunc={isJoin} isSubmitAble={isJoinSubmitAble} text={'회원가입'} />
-      </form>
-    </div>
+        <Button
+          submitFunc={submitJoin}
+          isSubmitAble={isJoinAble}
+          label={'회원가입'}
+          size={'wfull'}
+          bg={isJoinAble ? 'red' : 'grey'}
+          text={'white'}
+        />
+      </WrapProvider>
+    </WrapProvider>
   );
 }
