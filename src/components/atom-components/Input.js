@@ -7,7 +7,7 @@ import SerchIcon from '../../icons/SerchIcon';
 import { inputHandler, phoneNumberHandler } from '../../util/inputValue';
 
 export const InputVariants = cva(
-  `p-3 block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600`,
+  `p-2 text-sm md:text-md block rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600`,
   {
     variants: {
       size: {
@@ -66,6 +66,7 @@ export default function Input({
             position={'inInput'}
             size={'sm'}
             bg={'red'}
+            text={'white'}
           />
         ) : (
           ''
@@ -77,6 +78,7 @@ export default function Input({
             position={'inInput'}
             size={'sm'}
             bg={'red'}
+            isSubmitAble={true}
           />
         ) : (
           ''
