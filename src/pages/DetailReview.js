@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { reviewsState } from '../recoilAtoms';
@@ -6,6 +6,7 @@ import { seletReview } from '../recoilAtoms';
 import { useRecoilState } from 'recoil';
 import axiosConfig from '../api/axiosConfig';
 import { formatDateWithTime } from '../util/Regs';
+import Contents from './Contents';
 
 export default function DetailReview() {
   const reviews = useRecoilValue(reviewsState);
@@ -35,7 +36,6 @@ export default function DetailReview() {
 
   useEffect(() => {
     isReviewSelet();
-    console.log(formatDateWithTime(selectReview.createTime));
   }, []);
 
   return (
@@ -65,6 +65,7 @@ export default function DetailReview() {
           <p>평점은 {selectReview.grade}점 드립니다</p>
         </div>
       </div>
+      {/* <Contents></Contents> */}
     </div>
   );
 }
