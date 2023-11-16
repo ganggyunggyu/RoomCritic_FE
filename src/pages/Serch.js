@@ -1,10 +1,11 @@
-import React, { useDeferredValue, useEffect, useState, useTransition } from 'react';
+import React, { useState } from 'react';
 import tmdbAxiosConfig from '../api/tmdbAxiosConfig';
 import Card from '../components/Card';
 import SerchIcon from '../icons/SerchIcon';
 import { useNavigate } from 'react-router-dom';
 import { searchContentsState } from '../recoilAtoms';
 import { useRecoilState } from 'recoil';
+import Input from '../components/atom-components/Input';
 
 export default function Serch() {
   const navigator = useNavigate();
@@ -12,7 +13,7 @@ export default function Serch() {
 
   // const [isPending, startTransition] = useTransition();
   const [searchContents, setSerchContents] = useRecoilState(searchContentsState);
-  const fetchSearchMovie = async () => {
+  const requestSearchContent = async () => {
     const result = await tmdbAxiosConfig.get(
       `/search/multi?include_adult=false&query=${searchValue}`,
     );
@@ -31,27 +32,14 @@ export default function Serch() {
   return (
     <div className="flex flex-col items-center justify-center gap-5 pt-5">
       <div className="w-11/12 sm:w-96 relative">
-        <input
-          className="border focus:border-red-400 focus:bg-slate-50 w-full p-3 rounded-md text-zinc-900"
-          type="text"
-          placeholder="작품명을 검색해봐요!"
-          onChange={(e) => {
-            setSerchValue(e.target.value);
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              fetchSearchMovie();
-            }
-          }}
+        <Input
+          placeholder={'작품명을 입력하세요!'}
+          value={searchValue}
+          setValue={setSerchValue}
+          name={'search'}
+          size={'wfull'}
+          btn_func={requestSearchContent}
         />
-        <button
-          onClick={fetchSearchMovie}
-          type="button"
-          className="absolute top-3 right-3 text-white text-sm rounded-md bg-red-400 w-10 h-6 hover:bg-red-500 flex items-center justify-center"
-        >
-          <SerchIcon />
-        </button>
       </div>
       <div className="w-11/12 flex flex-wrap items-center justify-center gap-3">
         {searchContents.map((content, i) => {
