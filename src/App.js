@@ -12,18 +12,20 @@ import Home from './pages/Home';
 import Detail from './pages/Detail';
 import Create from './pages/Create';
 import DetailReview from './pages/DetailReview';
-import Footer from './components/Footer';
 import DarkModeButton from './components/DarkModeButton';
 import KakaoLogin from './pages/KakaoLogin';
 import useDarkMode from './hooks/useDarkMode';
 import useLogin from './hooks/useLogin';
+import useContentFetch from './hooks/useContentFetch';
 
 function App() {
   const { darkMode, toggleDarkMode } = useDarkMode();
   const { fetchLogin } = useLogin();
+  const { fetchReview } = useContentFetch();
 
   useEffect(() => {
     fetchLogin();
+    fetchReview();
   }, []);
 
   return (
@@ -42,7 +44,6 @@ function App() {
           <Route path="/auth" element={<KakaoLogin />} />
         </Routes>
       </div>
-      <Footer />
       <DarkModeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
     </div>
   );
