@@ -1,6 +1,11 @@
-export const emailReg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-
-export const passwordReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+export const emailRegTest = (email) => {
+  const emailReg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  return emailReg.test(email);
+};
+export const PasswordRegTest = (password) => {
+  const passwordReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+  return passwordReg.test(password);
+};
 
 export const formatDateWithTime = (inputDateString) => {
   const inputDate = new Date(inputDateString);
