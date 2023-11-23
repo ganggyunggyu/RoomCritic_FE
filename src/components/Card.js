@@ -21,6 +21,8 @@ export default function Card({ content, onClick }) {
       <div className={`w-64 h-80 text-center border rounded-md shadow-md p-1`}>
         <img
           className="w-full h-5/6"
+          loading="lazy"
+          decoding="async"
           src={
             content.contentPosterImg ||
             `https://www.themoviedb.org/t/p/original${content.poster_path || content.backdrop_path}`

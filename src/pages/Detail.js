@@ -32,7 +32,13 @@ export default function Detail() {
 
   return (
     <div className="w-full flex flex-col items-center justify-center gap-5">
-      <img src={`https://www.themoviedb.org/t/p/original/${content.backdrop_path}`} alt="" />
+      <img
+        style={{ width: '850px', Height: '450px' }}
+        loading="lazy"
+        decoding="async"
+        src={`https://www.themoviedb.org/t/p/original/${content.backdrop_path}`}
+        alt="movie-img"
+      />
       <div className="h-84 w-11/12 max-w-fit flex flex-col items-center md:items-start md:flex-row gap-10 p-5">
         <div className="flex flex-col gap-5 w-full">
           <div className="flex items-center w-full justify-between">
