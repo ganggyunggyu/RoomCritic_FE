@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import tmdbAxiosConfig from '../api/tmdbAxiosConfig';
-import { useRecoilState } from 'recoil';
-import { reviewsState } from '../recoilAtoms';
 import axiosConfig from '../api/axiosConfig';
 
 const useContentFetch = (mediaType, contentId) => {
   const [content, setContent] = useState({});
-  const [reviews, setReviews] = useRecoilState(reviewsState);
+  const [reviews, setReviews] = useState([]);
+
   const fetchContent = async () => {
     try {
       if (mediaType !== undefined && contentId !== undefined) {
@@ -33,7 +32,12 @@ const useContentFetch = (mediaType, contentId) => {
     }
   };
 
-  return { content, fetchContent, reviews, fetchReview };
+  return {
+    content,
+    fetchContent,
+    reviews,
+    fetchReview,
+  };
 };
 
 export default useContentFetch;
