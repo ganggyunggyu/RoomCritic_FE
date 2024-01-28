@@ -7,6 +7,7 @@ import { useRecoilState } from 'recoil';
 import axiosConfig from '../api/axiosConfig';
 import { formatDateWithTime } from '../util/Regs';
 import Contents from './Contents';
+import Footer from '../components/Footer';
 
 export default function DetailReview() {
   const reviews = useRecoilValue(reviewsState);
@@ -39,18 +40,20 @@ export default function DetailReview() {
   }, []);
 
   return (
-    <div className="md:w-full md:flex-row gap-10 pt-10 flex items-center justify-center">
-      <div className="w-10/12 flex flex-col md:flex-row justify-center gap-10">
+    <div className="gap-10 pt-10 flex items-center justify-center">
+      <div className="w-10/12 flex flex-col justify-center items-center gap-10">
         <img
-          className="w-full md:w-6/12 "
+          style={{ width: '850px', Height: '450px' }}
+          loading="lazy"
+          decoding="async"
           src={
             selectReview.contentBackdropImg ||
             selectReview.contentPosterImg ||
             selectReview.contentImg
           }
-          alt=""
+          alt="movie-img"
         />
-        <div className="w-full md:w-6/12 flex flex-col gap-5 justify-start items-center p-3">
+        <div className="w-full  flex flex-col gap-5 justify-start items-center p-3">
           <h1
             onClick={() => {
               console.log(selectReview);
@@ -63,9 +66,10 @@ export default function DetailReview() {
           <p>{selectReview.review}</p>
           <p>{selectReview.addReview}</p>
           <p>평점은 {selectReview.grade}점 드립니다</p>
+          <Contents />
+          <Footer />
         </div>
       </div>
-      {/* <Contents></Contents> */}
     </div>
   );
 }

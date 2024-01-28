@@ -9,6 +9,8 @@ import useContentFetch from '../hooks/useContentFetch';
 
 import CardWrapProvider from '../components/wraper-components/CardWrapProvider';
 import Contents from './Contents';
+import Footer from '../components/Footer';
+import Button from '../components/atom-components/Button';
 
 export default function Detail() {
   const navigator = useNavigate();
@@ -54,13 +56,12 @@ export default function Detail() {
                 한줄평 쓰기
               </button>
             ) : (
-              <button
+              <Button
+                label={'로그인 하고 한줄평 쓰자!'}
                 onClick={() => {
                   navigator('/login');
                 }}
-              >
-                로그인 하고 한줄평 쓰자!
-              </button>
+              />
             )}
           </div>
           <div>전세계의 평점 : {content.vote_average}</div>
@@ -68,7 +69,6 @@ export default function Detail() {
           <div className="tracking-wide leading-relaxed w-full">줄거리 : {content.overview}</div>
         </div>
       </div>
-
       <CardWrapProvider
         title={`${content.title || content.name}에 남겨진 리뷰`}
         cardList={reviews}
@@ -76,6 +76,7 @@ export default function Detail() {
       />
       {reviews.length === 0 && <p>남겨진 리뷰가 없어요 ... 하나 써주시지요</p>}
       <Contents />
+      <Footer />
     </div>
   );
 }
