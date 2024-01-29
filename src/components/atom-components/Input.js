@@ -59,18 +59,7 @@ export default function Input({
             className={cn(InputVariants({ size }))}
           />
         )}
-        {name === 'email' ? (
-          <Button
-            submitFunc={emailCheck}
-            label={'인증'}
-            position={'inInput'}
-            size={'sm'}
-            bg={'red'}
-            text={'white'}
-          />
-        ) : (
-          ''
-        )}
+
         {name === 'search' ? (
           <Button
             submitFunc={btn_func}
