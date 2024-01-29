@@ -22,7 +22,7 @@ const useContentFetch = (mediaType, contentId) => {
 
   const fetchReview = async () => {
     try {
-      const result = await axiosConfig.post('post/review', {
+      const result = await axiosConfig.get('post/review', {
         contentType: mediaType,
         contentId: contentId,
       });
