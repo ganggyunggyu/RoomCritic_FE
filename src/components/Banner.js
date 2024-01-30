@@ -8,8 +8,6 @@ export default function Banner() {
         <p>평가만 하면서말야</p>
         <p>돈 벌고싶다 이말이야</p>
       </div>
-      <div></div>
-      <div></div>
     </div>
   );
 }
