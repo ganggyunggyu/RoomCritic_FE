@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from './Card.module.css';
 
 export default function CardReview({ content, onClick }) {
   const [cardHover, setCardHover] = useState(false);
@@ -7,15 +6,8 @@ export default function CardReview({ content, onClick }) {
     setCardHover(true);
   };
   return (
-    <div
-      onClick={onClick}
-      onMouseOver={cardMouseOver}
-      onMouseLeave={() => setCardHover(false)}
-      className={`${styled.CardStyled}`}
-    >
-      {cardHover ? (
-        <p className={`${styled.CardReview} absolute z-10 text-white p-1`}>{content.review}</p>
-      ) : null}
+    <div onClick={onClick} onMouseOver={cardMouseOver} onMouseLeave={() => setCardHover(false)}>
+      {cardHover ? <p className={` absolute z-10 text-white p-1`}>{content.review}</p> : null}
 
       <div className={`w-64 h-80 text-center border shadow-md`}>
         <img className="w-full h-5/6" src={content.contentPosterImg} alt="" />
