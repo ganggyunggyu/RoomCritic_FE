@@ -1,67 +1,79 @@
 import React, { useState } from 'react';
 import FormHeader from '../components/FormHeader';
-import Input from '../components/atom-components/Input';
-import Button from '../components/atom-components/Button';
+import Input from '../components/AtomComponent/Input';
+import Button from '../components/AtomComponent/Button';
 import { useNavigate } from 'react-router-dom';
-import useKakaoLogin from '../hooks/useKakaoLogin';
 import useLogin from '../hooks/useLogin';
-import WrapProvider from '../components/wraper-components/WrapProvider';
+import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
+import { inputHandler } from '../util/inputValue';
+import { PasswordRegTest, emailRegTest } from '../util/Regs';
 
 export default function Login() {
   const navigator = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { redirectKakao } = useKakaoLogin();
-  const { requestLogin } = useLogin({ email: email, password: password });
+
+  const { submitLogin, data } = useLogin({ email: email, password: password });
   const directJoin = () => {
     navigator('/join');
   };
 
   const LoginInputs = [
-    { value: email, setValue: setEmail, type: 'email', placeholder: '이메일' },
+    {
+      value: email,
+      setValue: setEmail,
+      type: 'email',
+      placeholder: '이메일',
+      isReg: emailRegTest(email),
+    },
     {
       value: password,
       setValue: setPassword,
       type: 'password',
       placeholder: '비밀번호',
+      isReg: PasswordRegTest(password),
     },
   ];
-  const LoginButtons = [
-    { func: requestLogin, label: '로그인' },
-    { func: directJoin, label: '회원가입' },
-    { func: redirectKakao, label: '카카오 로그인' },
-  ];
+
+  const isLoginAble = () => {
+    return !LoginInputs.some((FormItem) => {
+      return FormItem.isReg === false;
+    });
+  };
+  const activeLogin = isLoginAble();
 
   return (
-    <WrapProvider type={'wrap'}>
+    <ResponsiveProvider direction={'col'}>
       <FormHeader text={'로그인'} />
-      <WrapProvider type={'form'}>
-        {LoginInputs.map((el, i) => {
+      <form action="" className="flex flex-col gap-3 md:w-1/2 w-full pb-10">
+        {LoginInputs.map((FormItem, i) => {
           return (
             <Input
               key={i}
-              value={el.value}
-              setValue={el.setValue}
-              type={el.type}
-              placeholder={el.placeholder}
-              size={'wfull'}
+              value={FormItem.value}
+              type={FormItem.type}
+              onChange={(e) => {
+                inputHandler(e, FormItem.setValue);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  submitLogin();
+                }
+              }}
+              label={FormItem.placeholder}
             />
           );
         })}
-        {LoginButtons.map((btn, i) => {
-          return (
-            <Button
-              key={i}
-              submitFunc={btn.func}
-              label={btn.label}
-              bg={'red'}
-              text={'white'}
-              size={'wfull'}
-              isSubmitAble={true}
-            />
-          );
-        })}
-      </WrapProvider>
-    </WrapProvider>
+        {data && <p className="py-3 text-red-400">{data}</p>}
+        <Button
+          label={'로그인'}
+          bg={activeLogin ? 'main' : 'disable'}
+          disabled={!activeLogin}
+          onCLick={submitLogin}
+        />
+        <Button label={'회원가입'} bg={'main'} onClick={directJoin} />
+      </form>
+    </ResponsiveProvider>
   );
 }
