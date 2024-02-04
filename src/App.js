@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.css';
 
 import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -9,9 +9,9 @@ import Login from './pages/Login';
 import MyPage from './pages/MyPage';
 import Serch from './pages/Serch';
 import Home from './pages/Home';
-import Detail from './pages/Detail';
+import ContentDetail from './pages/ContentDetail';
 import Create from './pages/Create';
-import DetailReview from './pages/DetailReview';
+import ReviewDetail from './pages/ReviewDetail';
 import DarkModeButton from './components/DarkModeButton';
 import KakaoLogin from './pages/KakaoLogin';
 import useDarkMode from './hooks/useDarkMode';
@@ -29,17 +29,17 @@ function App() {
   }, []);
 
   return (
-    <div className={`${darkMode ? 'bg-zinc-800 text-white' : ''} transition-all`}>
+    <div className={`${darkMode ? 'bg-zinc-800 text-white' : ''} transition-all `}>
       <Header />
-      <div className="mt-12">
+      <div className="mt-12 flex flex-col items-center justify-center">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/mypage/:userId" element={<MyPage />} />
           <Route path="/join" element={<Join />} />
           <Route path="/login" element={<Login />} />
           <Route path="/serch" element={<Serch />} />
-          <Route path="/detail/:mediaType/:contentId" element={<Detail />} />
-          <Route path="/detail/review/:userId/:reviewId" element={<DetailReview />} />
+          <Route path="/detail/:mediaType/:contentId" element={<ContentDetail />} />
+          <Route path="/detail/review/:userId/:reviewId" element={<ReviewDetail />} />
           <Route path="/create/:mediaType/:contentId" element={<Create />} />
           <Route path="/auth" element={<KakaoLogin />} />
         </Routes>
