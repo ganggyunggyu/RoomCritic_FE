@@ -1,19 +1,21 @@
+import CardWrapProvider from '../components/WrapProvider/CardWrapProvider';
 import React, { useState } from 'react';
 import tmdbAxiosConfig from '../api/tmdbAxiosConfig';
-import Card from '../components/Card';
+import Card from '../components/Card/Card';
 import SerchIcon from '../icons/SerchIcon';
 import { useNavigate } from 'react-router-dom';
 import { searchContentsState } from '../recoilAtoms';
 import { useRecoilState } from 'recoil';
-import Input from '../components/atom-components/Input';
-
+import Input from '../components/AtomComponent/Input';
+import Button from '../components/AtomComponent/Button';
+import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
 export default function Serch() {
   const navigator = useNavigate();
   const [searchValue, setSerchValue] = useState('');
 
   // const [isPending, startTransition] = useTransition();
   const [searchContents, setSerchContents] = useRecoilState(searchContentsState);
-  const requestSearchContent = async () => {
+  const submitSearch = async () => {
     const result = await tmdbAxiosConfig.get(
       `/search/multi?include_adult=false&query=${searchValue}`,
     );
@@ -24,36 +26,46 @@ export default function Serch() {
   const isDetailReview = (content) => {
     navigator(`/detail/${content.media_type}/${content.id}`);
   };
-  // useEffect(() => {
-  //   fetchSearchMovie();
-  //   console.log(searchValue);
-  // }, [setSerchValue]);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-5 pt-5">
-      <div className="w-11/12 sm:w-96 relative">
-        <Input
-          placeholder={'작품명을 입력하세요!'}
-          value={searchValue}
-          setValue={setSerchValue}
-          name={'search'}
-          size={'wfull'}
-          btn_func={requestSearchContent}
+    <>
+      <ResponsiveProvider direction={'col'}>
+        <div className="w-2/3 relative">
+          <Input
+            value={searchValue}
+            onChange={(e) => {
+              setSerchValue(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                submitSearch();
+              }
+            }}
+            name={'search'}
+            className="w-full"
+          />
+          <Button
+            item={<SerchIcon />}
+            bg={'main'}
+            className={'absolute right-0 top-0'}
+            onClick={submitSearch}
+          />
+        </div>
+      </ResponsiveProvider>
+      {searchContents.length === 0 ? (
+        <>
+          <p className="pt-14 text-8xl animate-bounce">👆</p>
+          <p className="text-xl">원하는 작품을 검색해보세요!</p>
+        </>
+      ) : (
+        <CardWrapProvider
+          // title={`${searchValue}에 대한 검색결과`}
+          title={'검색결과'}
+          cardList={searchContents}
+          onClick={isDetailReview}
         />
-      </div>
-      <div className="w-11/12 flex flex-wrap items-center justify-center gap-3">
-        {searchContents.map((content, i) => {
-          return (
-            <Card
-              key={i}
-              content={content}
-              onClick={() => {
-                isDetailReview(content);
-              }}
-            />
-          );
-        })}
-      </div>
-    </div>
+      )}
+    </>
   );
 }

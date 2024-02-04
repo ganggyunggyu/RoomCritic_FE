@@ -1,12 +1,12 @@
 import React from 'react';
-import WrapProvider from '../components/wraper-components/WrapProvider';
+import ResponsiveProvider from './WrapProvider/ResponsiveProvider';
 
 export default function Footer() {
   return (
-    <WrapProvider type={'wrap'} className={'h-auto py-10 gap-10'}>
+    <ResponsiveProvider direction={'col'} className={'gap-5 p-10 opacity-60'}>
       <p>develop by 강경규</p>
       <p className="text-xl">connect</p>
       <p>qwzx16@naver.com</p>
-    </WrapProvider>
+    </ResponsiveProvider>
   );
 }

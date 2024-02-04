@@ -1,8 +1,8 @@
 import { useRecoilValue } from 'recoil';
-import CardWrapProvider from '../components/wraper-components/CardWrapProvider';
+import CardWrapProvider from '../components/WrapProvider/CardWrapProvider';
 import { isLoggedInState, searchContentsState } from '../recoilAtoms';
 import useReviewFetch from '../hooks/useReviewFetch';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useContentFetch from '../hooks/useContentFetch';
 
@@ -32,10 +32,9 @@ const Contents = () => {
     fetchContent();
     fetchMovieContentReviews();
     fetchTvContentReviews();
-    console.log(tvContents, movieContents);
   }, []);
   return (
-    <>
+    <React.Fragment>
       {isLoggedIn && searchContents.length !== 0 && (
         <CardWrapProvider
           title={'최근에 검색한 작품'}
@@ -54,7 +53,7 @@ const Contents = () => {
         cardList={tvContents}
         onClick={redirectContent}
       />
-    </>
+    </React.Fragment>
   );
 };
 export default Contents;
