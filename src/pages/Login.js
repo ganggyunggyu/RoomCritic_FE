@@ -45,7 +45,7 @@ export default function Login() {
   return (
     <ResponsiveProvider direction={'col'}>
       <FormHeader text={'로그인'} />
-      <form action="" className="flex flex-col gap-3 md:w-1/2 w-full pb-10">
+      <form action="" className="flex flex-col gap-3 md:w-1/2 w-full pb-10 transition-all">
         {LoginInputs.map((FormItem, i) => {
           return (
             <Input
