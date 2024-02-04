@@ -1,5 +1,6 @@
 export const inputHandler = (e, setValue) => {
   setValue(e.target.value);
+  console.log(e.target.value);
 };
 export const phoneNumberHandler = (e, setPhoneNumber) => {
   setPhoneNumber(

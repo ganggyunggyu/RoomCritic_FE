@@ -6,6 +6,23 @@ export const PasswordRegTest = (password) => {
   const passwordReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
   return passwordReg.test(password);
 };
+// export const phoneNumberRegTest = (phoneNumber) => {
+//   const phoneNumberReg = /^01[0-9]-\d{4}-\d{4}$/;
+//   return phoneNumberReg.test(phoneNumber);
+// };
+export const phoneNumberRegTest = (phoneNumber) => {
+  const phoneNumberReg = /^01[0-9]\d{4}\d{4}$/;
+  return phoneNumberReg.test(phoneNumber);
+};
+export const isTrim = (value) => {
+  return !!value.trim();
+};
+export const isSame = (value1, value2) => {
+  if (value1 === value2) {
+    return true;
+  }
+  return false;
+};
 
 export const formatDateWithTime = (inputDateString) => {
   const inputDate = new Date(inputDateString);
