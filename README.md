@@ -4,7 +4,7 @@
 
 ## 관련 링크
 
-- 배포사이트: https://room-critic-fe.vercel.app/
+- 배포사이트: https://room-critic.online/
 
 ## 서비스 소개
 
