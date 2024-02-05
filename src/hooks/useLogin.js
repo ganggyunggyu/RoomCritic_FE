@@ -1,9 +1,8 @@
-import { useSetRecoilState } from 'recoil';
-import axiosConfig from '../api/axiosConfig';
-
-import { useNavigate } from 'react-router-dom';
-import { isLoggedInState, userInfoState } from '../recoilAtoms';
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
+import axiosConfig from '../api/axiosConfig';
+import { isLoggedInState, userInfoState } from '../recoilAtoms';
 
 const useLogin = (requestUserInfo) => {
   const navigator = useNavigate();
@@ -34,16 +33,12 @@ const useLogin = (requestUserInfo) => {
 
   const fetchLogin = async () => {
     try {
-      const result = await axiosConfig.get('/auth/login/check', {
-        withCredentials: true,
-      });
-
+      const result = await axiosConfig.get('/auth/login/check');
       if (result.status === 200) {
         setIsLoggedIn(true);
         setUserInfo(result.data.userInfo.user);
       }
       if (result.status === 201) {
-        console.log(result.data.message);
         setIsLoggedIn(false);
         setUserInfo({});
       }
