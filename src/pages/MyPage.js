@@ -25,6 +25,9 @@ export default function MyPage() {
     fetchReview();
   }, []);
 
+  const redirectReview = (review) => {
+    navigator(`/detail/review/${review.userId}/${review._id}`);
+  };
   return (
     // <div className="flex flex-col items-center justify-center p-10">
     //   <p className="pb-10">나 {userInfo.displayName}이 쓴 리뷰들</p>
@@ -44,7 +47,11 @@ export default function MyPage() {
     // </div>
     <React.Fragment>
       <ResponsiveProvider direction={'col'}></ResponsiveProvider>
-      <CardWrapProvider title={`${userInfo.displayName}님이 쓰신 리뷰`} cardList={reviews} />
+      <CardWrapProvider
+        title={`${userInfo.displayName}님이 쓰신 리뷰`}
+        cardList={reviews}
+        onClick={redirectReview}
+      />
     </React.Fragment>
   );
 }
