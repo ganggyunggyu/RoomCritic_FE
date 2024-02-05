@@ -4,7 +4,7 @@
 
 ## 관련 링크
 
-- 배포사이트: 준비중입니다.
+- 배포사이트: https://room-critic-fe.vercel.app/
 - 포스팅: https://velog.io/@qwzx16/%EB%A6%AC%EC%97%91%ED%8A%B8%EC%99%80-Node.js%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%98%81%ED%99%94-%ED%95%9C%EC%A4%84%ED%8F%89-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-1-
 - (웹을 간단하게 확인해볼수 있습니다.)
 
