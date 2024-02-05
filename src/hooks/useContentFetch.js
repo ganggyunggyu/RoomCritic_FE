@@ -13,7 +13,7 @@ const useContentFetch = (mediaType, contentId) => {
         const copyContent = result.data;
         setContent(copyContent);
       } else {
-        console.error('mediaType or contentId is undefined');
+        console.log('mediaType or contentId is undefined');
       }
     } catch (err) {
       console.log(err);

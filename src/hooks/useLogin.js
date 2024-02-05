@@ -12,13 +12,12 @@ const useLogin = (requestUserInfo) => {
   const [data, setData] = useState('');
 
   const submitLogin = async () => {
-    console.log(requestUserInfo);
     try {
       const result = await axiosConfig.post('/auth/login', {
         email: requestUserInfo.email,
         password: requestUserInfo.password,
       });
-      console.log('로그인 요청 성공 : ', result.data);
+
       if (result.status === 200) {
         setUserInfo(result.data.userInfo);
         setIsLoggedIn(result.data.isLoggedIn);
@@ -38,7 +37,7 @@ const useLogin = (requestUserInfo) => {
       const result = await axiosConfig.get('/auth/login/check', {
         withCredentials: true,
       });
-      console.log(result);
+
       if (result.status === 200) {
         setIsLoggedIn(true);
         setUserInfo(result.data.userInfo.user);
@@ -48,8 +47,8 @@ const useLogin = (requestUserInfo) => {
         setIsLoggedIn(false);
         setUserInfo({});
       }
-    } catch (err) {
-      console('fetchLoginERROR !!', err);
+    } catch (error) {
+      console.error('fetchLoginERROR !!', error);
     }
   };
 
