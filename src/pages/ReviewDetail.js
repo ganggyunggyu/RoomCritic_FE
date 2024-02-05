@@ -31,8 +31,6 @@ export default function ReviewDetail() {
         }
       }
       const result = await axiosConfig.get(`post/review/${userId}/${reviewId}`);
-      console.log(result);
-
       setSelectReview(result.data.review);
     } catch (err) {
       console.log(err);
@@ -42,8 +40,6 @@ export default function ReviewDetail() {
   useEffect(() => {
     isReviewSelet();
   }, []);
-
-  console.log(userId, user);
 
   const Stars = Array.from({ length: +selectReview.grade }, () => 0);
 
