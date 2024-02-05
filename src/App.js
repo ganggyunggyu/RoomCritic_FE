@@ -31,17 +31,17 @@ function App() {
   return (
     <div className={`${darkMode ? 'bg-zinc-800 text-white' : ''} transition-all `}>
       <Header />
-      <div className="mt-12 flex flex-col items-center justify-center">
+      <div className='mt-12 flex flex-col items-center justify-center'>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/mypage/:userId" element={<MyPage />} />
-          <Route path="/join" element={<Join />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/serch" element={<Serch />} />
-          <Route path="/detail/:mediaType/:contentId" element={<ContentDetail />} />
-          <Route path="/detail/review/:userId/:reviewId" element={<ReviewDetail />} />
-          <Route path="/create/:mediaType/:contentId" element={<Create />} />
-          <Route path="/auth" element={<KakaoLogin />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/mypage/:userId' element={<MyPage />} />
+          <Route path='/join' element={<Join />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/serch' element={<Serch />} />
+          <Route path='/detail/:mediaType/:contentId' element={<ContentDetail />} />
+          <Route path='/detail/review/:userId/:reviewId' element={<ReviewDetail />} />
+          <Route path='/create/:mediaType/:contentId' element={<Create />} />
+          <Route path='/auth' element={<KakaoLogin />} />
         </Routes>
       </div>
       <DarkModeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
