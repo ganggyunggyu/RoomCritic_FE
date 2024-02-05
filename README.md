@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# RoomCritic FE (영화 한줄평 웹 애플리케이션)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+## 관련 링크
 
-In the project directory, you can run:
+- 배포사이트: 준비중입니다.
+- 포스팅: https://velog.io/@qwzx16/%EB%A6%AC%EC%97%91%ED%8A%B8%EC%99%80-Node.js%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%98%81%ED%99%94-%ED%95%9C%EC%A4%84%ED%8F%89-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-1-
+- (웹을 간단하게 확인해볼수 있습니다.)
 
-### `yarn start`
+## 서비스 소개
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+평소에 좋아하는 콘텐츠에 대한 정보를 볼수 있습니다.
+영화 뿐 아니라 애니메이션 드라마 등 여러가지 내가 원하는 콘텐츠에 간단하게 한줄평을 남기거나 콘텐츠에 대한 자신의 생각을 글로 기록할수 있습니다.
+다른 사람이 남긴 게시글에 대해서도 볼수 있습니다.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 기술 스택
 
-### `yarn test`
+### FE 기술스택
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+JavaScript : 웹프론트엔드 필수 언어인 JavaScript를 사용했습니다.
 
-### `yarn build`
+React : 다양한 훅을 제공하고 커스텀 훅에 대한 정보가 많은 React를 프론트엔드 라이브러리로 사용했습니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Axios : Auto JSON 파싱과 모듈을 사용하여 중복 코드를 제거하였습니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+tailwindcss : 간단한 인라인 스타일링과 tailwind merge,cva,clsx를 이용하여 컴포넌트를 자유롭게 제작할수 있도록 사용했습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### BE 기술스택
 
-### `yarn eject`
+Node.js : 저에게 익숙한 JavaScript로 서버를 구축할수 있는 Node.js를 사용했습니다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Express.js : 미들웨어를 이용하여 다양한 기능을 구현하기 위하여 사용했습니다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+MongoDB : JSON 형식의 문저 저장을 간편하게 구현할수 있고 JavaScript를 배운 상태에서 러닝커브가 낮다고 판단하여 NoSQL데이터베이스인 MongoDB를 사용했습니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Mongoose : 데이터베이스의 스키마 지정과 스키마간의 관계성을 위해 사용했습니다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 시연 영상
 
-## Learn More
+### 회원가입
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+https://github.com/ganggyunggyu/ReactMovieReviewApp/assets/56907263/439e9fb0-810a-4268-a3e2-eaedc8f858f6
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 로그인
 
-### Code Splitting
+https://github.com/ganggyunggyu/ReactMovieReviewApp/assets/56907263/be9f04a3-59ce-47d4-9dd2-3347c64f27ab
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 검색
 
-### Analyzing the Bundle Size
+https://github.com/ganggyunggyu/ReactMovieReviewApp/assets/56907263/f413b460-e610-47e6-a355-ddac975f3c6e
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 한줄평 작성
 
-### Making a Progressive Web App
+https://github.com/ganggyunggyu/ReactMovieReviewApp/assets/56907263/77cdef04-a4bb-45d0-a1fe-25de1b72b35b
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 다크모드 & 반응형
 
-### Advanced Configuration
+https://github.com/ganggyunggyu/ReactMovieReviewApp/assets/56907263/0eb9f065-e4e5-4d73-a24c-24858ba7bcfc
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 이미지 레이지 로딩 구현
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://github.com/ganggyunggyu/ReactMovieReviewApp/assets/56907263/9cf868de-d6bb-411b-9782-28d50b06b63b
