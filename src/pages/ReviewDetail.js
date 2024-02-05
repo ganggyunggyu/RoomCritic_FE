@@ -45,13 +45,7 @@ export default function ReviewDetail() {
 
   return (
     <React.Fragment>
-      <DetailBackground
-        path={
-          selectReview.contentBackdropImg ||
-          selectReview.contentPosterImg ||
-          selectReview.contentImg
-        }
-      />
+      <DetailBackground path={selectReview.contentBackdropImg} />
       <ResponsiveProvider direction={'col'} className={'gap-5 z-10'}>
         <p>
           {selectReview.userName}님의 {selectReview.contentName} 리뷰
