@@ -3,7 +3,9 @@ import { cn } from '../../util/cn';
 import { cva } from 'class-variance-authority';
 
 export const ButtonVariants = cva(
-  `flex justify-center items-center rounded-md p-2 text-sm text-white font-semibold transition-all shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600`,
+  `flex justify-center items-center rounded-md p-2 text-sm text-white font-semibold 
+  transition-1s shadow-sm focus-visible:outline focus-visible:outline-2 
+  focus-visible:outline-offset-2 focus-visible:outline-red-600`,
   {
     variants: {
       bg: {
@@ -20,7 +22,7 @@ export const ButtonVariants = cva(
 );
 export default function FormButton({ label, item, bg, text, className, ...props }) {
   return (
-    <button type="button" className={cn(ButtonVariants({ bg, text, className }))} {...props}>
+    <button type='button' className={cn(ButtonVariants({ bg, text, className }))} {...props}>
       {label && label}
       {item && item}
     </button>
