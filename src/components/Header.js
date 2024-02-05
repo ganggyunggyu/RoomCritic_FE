@@ -34,7 +34,7 @@ export default function Header() {
       <nav className="flex justify-around gap-3 md:w-7/12 w-10/12 transition-all">
         <div className="hover:text-red-400 transition-all">
           <Link to={'/'}>
-            <span>룸크리틱</span>
+            <p className="text-md">룸크리틱</p>
           </Link>
         </div>
         <div className="grow"></div>
