@@ -1,7 +1,6 @@
 import CardWrapProvider from '../components/WrapProvider/CardWrapProvider';
 import React, { useState } from 'react';
 import tmdbAxiosConfig from '../api/tmdbAxiosConfig';
-import Card from '../components/Card/Card';
 import SerchIcon from '../icons/SerchIcon';
 import { useNavigate } from 'react-router-dom';
 import { searchContentsState } from '../recoilAtoms';
@@ -19,7 +18,7 @@ export default function Serch() {
     const result = await tmdbAxiosConfig.get(
       `/search/multi?include_adult=false&query=${searchValue}`,
     );
-    console.log(result.data.results);
+    console.table(result.data.results);
     setSerchContents(result.data.results);
   };
 
@@ -30,7 +29,7 @@ export default function Serch() {
   return (
     <>
       <ResponsiveProvider direction={'col'}>
-        <div className="w-2/3 relative">
+        <div className='w-2/3 relative'>
           <Input
             value={searchValue}
             onChange={(e) => {
@@ -43,7 +42,7 @@ export default function Serch() {
               }
             }}
             name={'search'}
-            className="w-full"
+            className='w-full'
           />
           <Button
             item={<SerchIcon />}
@@ -55,8 +54,8 @@ export default function Serch() {
       </ResponsiveProvider>
       {searchContents.length === 0 ? (
         <>
-          <p className="pt-14 text-8xl animate-bounce">👆</p>
-          <p className="text-xl">원하는 작품을 검색해보세요!</p>
+          <p className='pt-14 text-8xl animate-bounce'>👆</p>
+          <p className='text-xl'>원하는 작품을 검색해보세요!</p>
         </>
       ) : (
         <CardWrapProvider

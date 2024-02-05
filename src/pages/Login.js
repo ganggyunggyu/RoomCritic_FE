@@ -45,7 +45,7 @@ export default function Login() {
   return (
     <ResponsiveProvider direction={'col'}>
       <FormHeader text={'로그인'} />
-      <form action="" className="flex flex-col gap-3 md:w-1/2 w-full pb-10 transition-all">
+      <form action='' className='flex flex-col gap-3 md:w-1/2 w-full pb-10 transition-all'>
         {LoginInputs.map((FormItem, i) => {
           return (
             <Input
@@ -65,12 +65,12 @@ export default function Login() {
             />
           );
         })}
-        {data && <p className="py-3 text-red-400">{data}</p>}
+        {data && <p className='py-3 text-red-400'>{data}</p>}
         <Button
           label={'로그인'}
           bg={activeLogin ? 'main' : 'disable'}
           disabled={!activeLogin}
-          onCLick={submitLogin}
+          onClick={submitLogin}
         />
         <Button label={'회원가입'} bg={'main'} onClick={directJoin} />
       </form>
