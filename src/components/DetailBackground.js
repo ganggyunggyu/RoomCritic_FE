@@ -3,10 +3,10 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 const DetailBackground = ({ path }) => {
   return (
     <img
-      className="fixed top-0 opacity-20 z-0 blur-sm w-screen"
+      className='fixed top-0 opacity-20 z-0 blur-sm w-screen h-screen'
       src={`https://www.themoviedb.org/t/p/original/${path}`}
       alt={path}
-      loading="lazy"
+      loading='lazy'
       // effect="blur"
       // width={'100vw'}
       // height={'100vh'}
