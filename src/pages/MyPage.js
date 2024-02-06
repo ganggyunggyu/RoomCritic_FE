@@ -15,7 +15,7 @@ export default function MyPage() {
   const userInfo = useRecoilValue(userInfoState);
   const [reviews, setReviews] = useRecoilState(reviewsState);
   const fetchReview = async () => {
-    const result = await axiosConfig.get(`post/myreview/${userId}`, {
+    const result = await axiosConfig.get(`post/${userId}`, {
       withCredentials: true,
     });
     setReviews(result.data.reviews);

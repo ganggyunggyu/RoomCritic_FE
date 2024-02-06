@@ -7,12 +7,13 @@ const useReviewFetch = () => {
   const [movieContents, setMovieContents] = useState([]);
 
   const fetchReview = async () => {
-    const result = await axiosConfig.get('post/review');
+    const result = await axiosConfig.get('review/latest');
+    console.log(result);
     setReviews(result.data.reviews);
   };
   const fetchTvContentReviews = async () => {
     try {
-      const result = await axiosConfig.get('post/review/tv');
+      const result = await axiosConfig.get('review/tv');
       setTvContents(result.data.tvContentReviews);
     } catch (error) {
       console.log(error);
@@ -20,7 +21,7 @@ const useReviewFetch = () => {
   };
   const fetchMovieContentReviews = async () => {
     try {
-      const result = await axiosConfig.get('post/review/movie');
+      const result = await axiosConfig.get('review/movie');
       setMovieContents(result.data.movieContentReviews);
     } catch (error) {
       console.log(error);

@@ -22,10 +22,7 @@ const useContentFetch = (mediaType, contentId) => {
 
   const fetchReview = async () => {
     try {
-      const result = await axiosConfig.post('post/review', {
-        contentType: mediaType,
-        contentId: contentId,
-      });
+      const result = await axiosConfig.get(`review/${contentId}/${mediaType}`);
       setReviews(result.data.reviews);
     } catch (err) {
       console.log(err);
