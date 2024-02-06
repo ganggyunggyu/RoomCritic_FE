@@ -1,15 +1,25 @@
 import { useState } from 'react';
 import tmdbAxiosConfig from '../api/tmdbAxiosConfig';
-import axiosConfig from '../api/axiosConfig';
+import { useRecoilState } from 'recoil';
+import { searchContentsState } from '../recoilAtoms';
 
-const useContentFetch = (mediaType, contentId) => {
+const useContentFetch = () => {
   const [content, setContent] = useState({});
-  const [reviews, setReviews] = useState([]);
+  const [searchContents, setSerchContents] = useRecoilState(searchContentsState);
 
-  const fetchContent = async () => {
+  const fetchSearchContents = async (searchValue) => {
+    const result = await tmdbAxiosConfig.get(
+      `/search/multi?include_adult=false&query=${searchValue}`,
+    );
+    console.table(result.data.results);
+    setSerchContents(result.data.results);
+  };
+
+  const fetchContent = async (mediaType, contentId) => {
     try {
       if (mediaType !== undefined && contentId !== undefined) {
         const result = await tmdbAxiosConfig.get(`${mediaType}/${contentId}`);
+        console.log(result);
         const copyContent = result.data;
         setContent(copyContent);
       } else {
@@ -20,20 +30,11 @@ const useContentFetch = (mediaType, contentId) => {
     }
   };
 
-  const fetchReview = async () => {
-    try {
-      const result = await axiosConfig.get(`review/${contentId}/${mediaType}`);
-      setReviews(result.data.reviews);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return {
-    content,
     fetchContent,
-    reviews,
-    fetchReview,
+    content,
+    fetchSearchContents,
+    searchContents,
   };
 };
 
