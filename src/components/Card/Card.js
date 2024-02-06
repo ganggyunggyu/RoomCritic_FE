@@ -15,7 +15,7 @@ export default function Card({ content, onClick }) {
       onMouseLeave={() => setCardHover(false)}
       className='hover:scale-105 transition-all rounded-md cursor-pointer py-3 shadow-lg'
     >
-      {cardHover && <CardHover review={content.review} />}
+      {cardHover && <CardHover review={content.lineReview} />}
       <div className={`text-center flex gap-5 flex-col md:w-64 w-32 transition-1s`}>
         <CardImage
           path={content.contentPosterImg || content.poster_path || content.backdrop_path}

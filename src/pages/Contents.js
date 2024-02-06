@@ -3,21 +3,17 @@ import CardWrapProvider from '../components/WrapProvider/CardWrapProvider';
 import { isLoggedInState, searchContentsState } from '../recoilAtoms';
 import useReviewFetch from '../hooks/useReviewFetch';
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import useContentFetch from '../hooks/useContentFetch';
+import { useNavigate } from 'react-router-dom';
 
 const Contents = () => {
-  const { mediaType, contentId } = useParams();
-
   const navigator = useNavigate();
-  const { fetchContent } = useContentFetch(mediaType, contentId);
   const {
-    fetchReview,
-    reviews,
+    fetchLatestReviews,
+    latestReviews,
     fetchMovieContentReviews,
+    movieContentReviews,
     fetchTvContentReviews,
-    tvContents,
-    movieContents,
+    tvContentReviews,
   } = useReviewFetch();
   const redirectContent = (content) => {
     navigator(
@@ -28,8 +24,7 @@ const Contents = () => {
   const isLoggedIn = useRecoilValue(isLoggedInState);
   const searchContents = useRecoilValue(searchContentsState);
   useEffect(() => {
-    fetchReview();
-    fetchContent();
+    fetchLatestReviews();
     fetchMovieContentReviews();
     fetchTvContentReviews();
   }, []);
@@ -44,13 +39,17 @@ const Contents = () => {
       )}
       <CardWrapProvider
         title={'최근에 리뷰가 남겨진 작품'}
-        cardList={reviews}
+        cardList={latestReviews}
         onClick={redirectContent}
       />
-      <CardWrapProvider title={'영화 리뷰들'} cardList={movieContents} onClick={redirectContent} />
+      <CardWrapProvider
+        title={'영화 리뷰들'}
+        cardList={movieContentReviews}
+        onClick={redirectContent}
+      />
       <CardWrapProvider
         title={'TV 시리즈 리뷰들'}
-        cardList={tvContents}
+        cardList={tvContentReviews}
         onClick={redirectContent}
       />
     </React.Fragment>

@@ -10,23 +10,27 @@ import DetailBackground from '../components/DetailBackground';
 import Button from '../components/AtomComponent/Button';
 import { useRecoilValue } from 'recoil';
 import { isLoggedInState } from '../recoilAtoms';
+import useReviewFetch from '../hooks/useReviewFetch';
 
 export default function ContentDetail() {
   const navigator = useNavigate();
   const { mediaType, contentId } = useParams();
-  const { content, fetchContent, reviews, fetchReview } = useContentFetch(mediaType, contentId);
+  const { content, fetchContent } = useContentFetch();
+  const { fetchSelectedContentReviews, selectedContentReviews } = useReviewFetch();
   const isLoggedIn = useRecoilValue(isLoggedInState);
 
   const redirectReview = (review) => {
     navigator(`/detail/review/${review.userId}/${review._id}`);
   };
   useEffect(() => {
-    fetchReview();
+    fetchSelectedContentReviews(contentId, mediaType);
+
     window.scrollTo(0, 0);
   }, [mediaType, contentId]);
 
   useEffect(() => {
-    fetchContent();
+    fetchContent(mediaType, contentId);
+
     window.scrollTo(0, 0);
   }, [mediaType, contentId]);
 
@@ -35,30 +39,30 @@ export default function ContentDetail() {
       <DetailBackground path={content.backdrop_path} />
       <ContentInfo content={content} />
       <ResponsiveProvider direction={'col'} className={'gap-5 z-10 lg:flex-row'}>
-        <Button label={'좋아요 🤩'} bg={'main'} className={'lg:w-4/12 w-2/3 text-lg'} />
-        <Button label={'별로에요 🧐'} bg={'main'} className={'lg:w-4/12 w-2/3 text-lg'} />
+        <Button label={'좋아요 🤩'} bg={'main'} className={'lg:w-4/12 w-full text-lg'} />
+        <Button label={'별로에요 🧐'} bg={'main'} className={'lg:w-4/12 w-full text-lg'} />
         {isLoggedIn ? (
           <Button
             label={'리뷰 쓰러가기'}
             bg={'main'}
-            className={'lg:w-4/12 w-2/3 text-lg'}
+            className={'lg:w-4/12 w-full text-lg'}
             onClick={() => navigator(`/create/${mediaType}/${contentId}`)}
           />
         ) : (
           <Button
             label={'로그인하고 리뷰쓰자!'}
             bg={'main'}
-            className={'lg:w-4/12 w-2/3 text-lg'}
+            className={'lg:w-4/12 w-full text-lg'}
             onClick={() => navigator(`/login`)}
           />
         )}
       </ResponsiveProvider>
-      {reviews.length === 0 ? (
+      {selectedContentReviews.length === 0 ? (
         <p className='py-10'>남겨진 리뷰가 없어요 🥲</p>
       ) : (
         <CardWrapProvider
           title={`${content.title || content.name}에 남겨진 리뷰`}
-          cardList={reviews}
+          cardList={selectedContentReviews}
           onClick={redirectReview}
         />
       )}
