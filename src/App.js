@@ -25,7 +25,7 @@ function App() {
 
   useEffect(() => {
     fetchLogin();
-    fetchReview();
+    // fetchReview();
   }, []);
 
   return (

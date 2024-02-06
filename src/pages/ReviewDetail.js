@@ -15,7 +15,7 @@ import StarIcon from '../icons/StarIcon';
 
 export default function ReviewDetail() {
   const reviews = useRecoilValue(reviewsState);
-  const { userId, reviewId } = useParams();
+  const { reviewId } = useParams();
   const navigator = useNavigate();
   const [selectReview, setSelectReview] = useRecoilState(selectReviewState);
   const user = useRecoilValue(userInfoState);
@@ -30,8 +30,6 @@ export default function ReviewDetail() {
           }
         }
       }
-      const result = await axiosConfig.get(`post/review/${userId}/${reviewId}`);
-      setSelectReview(result.data.review);
     } catch (err) {
       console.log(err);
     }
