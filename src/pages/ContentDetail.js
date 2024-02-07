@@ -24,13 +24,11 @@ export default function ContentDetail() {
   };
   useEffect(() => {
     fetchSelectedContentReviews(contentId, mediaType);
-
     window.scrollTo(0, 0);
   }, [mediaType, contentId]);
 
   useEffect(() => {
     fetchContent(mediaType, contentId);
-
     window.scrollTo(0, 0);
   }, [mediaType, contentId]);
 
@@ -58,7 +56,7 @@ export default function ContentDetail() {
         )}
       </ResponsiveProvider>
       {selectedContentReviews.length === 0 ? (
-        <p className='py-10'>남겨진 리뷰가 없어요 🥲</p>
+        <p className='pt-10'>남겨진 리뷰가 없어요 🥲</p>
       ) : (
         <CardWrapProvider
           title={`${content.title || content.name}에 남겨진 리뷰`}
