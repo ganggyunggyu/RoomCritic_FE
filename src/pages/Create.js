@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 import StarIcon from '../icons/StarIcon';
 import Button from '../components/AtomComponent/Button';
 import DetailBackground from '../components/DetailBackground';
+import { useMutation } from '@tanstack/react-query';
 export default function Create() {
   const navigator = useNavigate();
   const userInfo = useRecoilValue(userInfoState);
@@ -17,7 +18,7 @@ export default function Create() {
   const [grade, setGrade] = useState(1);
   const stars = [1, 2, 3, 4, 5];
 
-  const sendReview = async () => {
+  const createReview = async () => {
     const reviewData = {
       userId: userInfo._id,
       userName: userInfo.displayName,
@@ -43,6 +44,20 @@ export default function Create() {
       console.log(err);
     }
   };
+
+  const createMutate = useMutation({
+    mutationFn: createReview,
+    onSuccess: () => {
+      console.log('요청 성공');
+    },
+    onError: () => {
+      console.error('에러 발생');
+    },
+    onSettled: () => {
+      console.log('결과에 관계 없이 무언가 실행됨');
+    },
+  });
+
   const fetchContent = async () => {
     try {
       const result = await tmdbAxiosConfig.get(`/${mediaType}/${contentId}`);
@@ -98,7 +113,7 @@ export default function Create() {
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
                   e.preventDefault();
-                  sendReview();
+                  createReview();
                 }
               }}
             />
@@ -114,14 +129,14 @@ export default function Create() {
               // onKeyDown={(e) => {
               //   if (e.key === 'Enter') {
               //     e.preventDefault();
-              //     sendReview();
+              //     createReview();
               //   }
               // }}
             ></textarea>
           </div>
           <div className='w-full flex'>
             <div className='grow' />
-            <Button label={'발행'} bg={'main'} onClick={sendReview} />
+            <Button label={'발행'} bg={'main'} onClick={createMutate.mutate} />
           </div>
         </div>
       </div>
