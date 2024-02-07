@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { reviewsState, userInfoState } from '../recoilAtoms';
-import { selectedReviewState } from '../recoilAtoms';
-import { useRecoilState } from 'recoil';
+import { userInfoState } from '../recoilAtoms';
 
 import { formatDateWithTime } from '../util/Regs';
 import Contents from './Contents';
@@ -65,6 +63,7 @@ export default function ReviewDetail() {
           {selectedReview.contentName} 다른 리뷰도 보러가기 ! <span className='text-3xl'>👈</span>
         </h1>
       </ResponsiveProvider>
+      <Contents />
       <Footer />
     </React.Fragment>
   );
