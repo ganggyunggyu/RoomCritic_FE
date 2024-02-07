@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import axiosConfig from '../api/axiosConfig';
 import { useState } from 'react';
 
@@ -11,9 +12,15 @@ const useReviewFetch = () => {
 
   const fetchLatestReviews = async () => {
     const result = await axiosConfig.get('review/latest');
-
     setLatestReviews(result.data.reviews);
+    return result;
   };
+  const query = useQuery({
+    queryKey: ['latestReviews'],
+    queryFn: fetchLatestReviews,
+  });
+  console.log('React-Query!', query.isPending, query.data);
+
   const fetchTvContentReviews = async () => {
     try {
       const result = await axiosConfig.get('review/tv');
@@ -61,6 +68,7 @@ const useReviewFetch = () => {
     myReviews,
     fetchSelectedReview,
     selectedReview,
+    query,
   };
 };
 

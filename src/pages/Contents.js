@@ -4,6 +4,7 @@ import { isLoggedInState, searchContentsState } from '../recoilAtoms';
 import useReviewFetch from '../hooks/useReviewFetch';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
 
 const Contents = () => {
   const navigator = useNavigate();
@@ -14,6 +15,7 @@ const Contents = () => {
     movieContentReviews,
     fetchTvContentReviews,
     tvContentReviews,
+    query,
   } = useReviewFetch();
   const redirectContent = (content) => {
     navigator(
@@ -37,11 +39,17 @@ const Contents = () => {
           onClick={redirectContent}
         />
       )}
-      <CardWrapProvider
-        title={'최근에 리뷰가 남겨진 작품'}
-        cardList={latestReviews}
-        onClick={redirectContent}
-      />
+      {query.isPending ? (
+        <ResponsiveProvider direction={'col'}>
+          <p>Loading</p>
+        </ResponsiveProvider>
+      ) : (
+        <CardWrapProvider
+          title={'최근에 작성된 리뷰들'}
+          cardList={query.data.data.reviews}
+          onClick={redirectContent}
+        />
+      )}
       <CardWrapProvider
         title={'영화 리뷰들'}
         cardList={movieContentReviews}
