@@ -8,15 +8,7 @@ import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
 
 const Contents = () => {
   const navigator = useNavigate();
-  const {
-    fetchLatestReviews,
-    latestReviews,
-    fetchMovieContentReviews,
-    movieContentReviews,
-    fetchTvContentReviews,
-    tvContentReviews,
-    query,
-  } = useReviewFetch();
+  const { latestReviewsQuery, tvContentReviewsQuery, movieContentReviewsQuery } = useReviewFetch();
   const redirectContent = (content) => {
     navigator(
       `/detail/${content.contentType || content.media_type}/${content.contentId || content.id}`,
@@ -25,11 +17,7 @@ const Contents = () => {
 
   const isLoggedIn = useRecoilValue(isLoggedInState);
   const searchContents = useRecoilValue(searchContentsState);
-  useEffect(() => {
-    fetchLatestReviews();
-    fetchMovieContentReviews();
-    fetchTvContentReviews();
-  }, []);
+
   return (
     <React.Fragment>
       {isLoggedIn && searchContents.length !== 0 && (
@@ -39,27 +27,39 @@ const Contents = () => {
           onClick={redirectContent}
         />
       )}
-      {query.isPending ? (
+      {latestReviewsQuery.isPending ? (
         <ResponsiveProvider direction={'col'}>
-          <p>Loading</p>
+          <p className='animate-spin'>Loading</p>
         </ResponsiveProvider>
       ) : (
         <CardWrapProvider
           title={'최근에 작성된 리뷰들'}
-          cardList={query.data.data.reviews}
+          cardList={latestReviewsQuery.data.data.reviews}
           onClick={redirectContent}
         />
       )}
-      <CardWrapProvider
-        title={'영화 리뷰들'}
-        cardList={movieContentReviews}
-        onClick={redirectContent}
-      />
-      <CardWrapProvider
-        title={'TV 시리즈 리뷰들'}
-        cardList={tvContentReviews}
-        onClick={redirectContent}
-      />
+      {tvContentReviewsQuery.isPending ? (
+        <ResponsiveProvider direction={'col'}>
+          <p className='animate-spin'>Loading</p>
+        </ResponsiveProvider>
+      ) : (
+        <CardWrapProvider
+          title={'TV 시리즈 리뷰들'}
+          cardList={tvContentReviewsQuery.data.data.tvContentReviews}
+          onClick={redirectContent}
+        />
+      )}
+      {movieContentReviewsQuery.isPending ? (
+        <ResponsiveProvider direction={'col'}>
+          <p className='animate-spin'>Loading</p>
+        </ResponsiveProvider>
+      ) : (
+        <CardWrapProvider
+          title={'영화 리뷰들'}
+          cardList={movieContentReviewsQuery.data.data.movieContentReviews}
+          onClick={redirectContent}
+        />
+      )}
     </React.Fragment>
   );
 };
