@@ -10,14 +10,14 @@ import DetailBackground from '../components/DetailBackground';
 import Button from '../components/AtomComponent/Button';
 import { useRecoilValue } from 'recoil';
 import { isLoggedInState } from '../recoilAtoms';
-import useReviewFetch from '../hooks/useReviewFetch';
+import useSeletedContentReviews from '../hooks/useSelectedContentReviewsQuery';
 
 export default function ContentDetail() {
   const navigator = useNavigate();
   const { mediaType, contentId } = useParams();
 
   const { detailContentQuery } = useContentFetch(mediaType, contentId);
-  const { selectedContentReviews } = useReviewFetch();
+  const { selectedContentReviewsQuery } = useSeletedContentReviews(contentId, mediaType);
   const isLoggedIn = useRecoilValue(isLoggedInState);
 
   const redirectReview = (review) => {
@@ -56,17 +56,24 @@ export default function ContentDetail() {
               />
             )}
           </ResponsiveProvider>
-          {selectedContentReviews.length === 0 ? (
-            <p className='pt-10'>남겨진 리뷰가 없어요 🥲</p>
+          {selectedContentReviewsQuery.isLoading ? (
+            <p className='animate-spin'>Loading</p>
           ) : (
-            <CardWrapProvider
-              title={`${
-                detailContentQuery.data.data.title || detailContentQuery.data.data.name
-              }에 남겨진 리뷰`}
-              cardList={selectedContentReviews}
-              onClick={redirectReview}
-            />
+            <React.Fragment>
+              {selectedContentReviewsQuery.data.data.reviews.length === 0 ? (
+                <p className='pt-10'>남겨진 리뷰가 없어요 🥲</p>
+              ) : (
+                <CardWrapProvider
+                  title={`${
+                    detailContentQuery.data.data.title || detailContentQuery.data.data.name
+                  }에 남겨진 리뷰`}
+                  cardList={selectedContentReviewsQuery.data.data.reviews}
+                  onClick={redirectReview}
+                />
+              )}
+            </React.Fragment>
           )}
+
           <Contents />
           <Footer />
         </React.Fragment>
