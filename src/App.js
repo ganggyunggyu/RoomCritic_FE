@@ -16,16 +16,13 @@ import DarkModeButton from './components/DarkModeButton';
 import KakaoLogin from './pages/KakaoLogin';
 import useDarkMode from './hooks/useDarkMode';
 import useLogin from './hooks/useLogin';
-import useContentFetch from './hooks/useContentFetch';
 
 function App() {
   const { darkMode, toggleDarkMode } = useDarkMode();
   const { fetchLogin } = useLogin();
-  const { fetchReview } = useContentFetch();
 
   useEffect(() => {
     fetchLogin();
-    // fetchReview();
   }, []);
 
   return (

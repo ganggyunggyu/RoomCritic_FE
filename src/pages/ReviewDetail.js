@@ -18,7 +18,7 @@ export default function ReviewDetail() {
 
   const { fetchSelectedReview, selectedReview } = useReviewFetch();
   const user = useRecoilValue(userInfoState);
-  //클라이언트에 리뷰 데이터가 있다면 그것을 사용하고 그렇지 않을 시 서버요청을 하고싶음
+
   useEffect(() => {
     fetchSelectedReview(userId, reviewId);
   }, []);

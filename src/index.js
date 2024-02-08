@@ -18,9 +18,7 @@ root.render(
       <RecoilRoot>
         <App />
       </RecoilRoot>
-      ,
     </BrowserRouter>
-    ,
   </QueryClientProvider>,
 );
 
