@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../Card/Card';
 import ResponsiveProvider from './ResponsiveProvider';
+import Loading from '../Loading';
 
 const CardWrapProvider = ({ title, cardList, onClick }) => {
   const cardConatinerRef = React.useRef(null);
@@ -20,8 +21,9 @@ const CardWrapProvider = ({ title, cardList, onClick }) => {
 
   return (
     <ResponsiveProvider direction={'row'}>
-      {!cardList && '작품이 없습니다.'}
-      {!cardList.length && '작품이 없습니다.'}
+      {!cardList && <Loading />}
+      {!cardList.length && <Loading />}
+      {/* {cardList.length === 0 && '작품이 없습니다.'} */}
       {cardList.length > 0 && (
         <div className='w-full z-10 relative'>
           <div className='absolute inset-y-0 left-0 z-20 rounded-full opacity-50 flex items-center justify-center hover:opacity-80 transition-all'>

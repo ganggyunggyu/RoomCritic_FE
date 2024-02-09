@@ -5,7 +5,7 @@ import useReviewFetch from '../hooks/useReviewFetch';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
-
+import Loading from '../components/Loading';
 const Contents = () => {
   const navigator = useNavigate();
   const { latestReviewsQuery, tvContentReviewsQuery, movieContentReviewsQuery } = useReviewFetch();
@@ -29,7 +29,7 @@ const Contents = () => {
       )}
       {latestReviewsQuery.isPending ? (
         <ResponsiveProvider direction={'col'}>
-          <p className='animate-spin'>Loading</p>
+          <Loading />
         </ResponsiveProvider>
       ) : (
         <CardWrapProvider
@@ -40,7 +40,7 @@ const Contents = () => {
       )}
       {tvContentReviewsQuery.isPending ? (
         <ResponsiveProvider direction={'col'}>
-          <p className='animate-spin'>Loading</p>
+          <Loading />
         </ResponsiveProvider>
       ) : (
         <CardWrapProvider
@@ -51,7 +51,7 @@ const Contents = () => {
       )}
       {movieContentReviewsQuery.isPending ? (
         <ResponsiveProvider direction={'col'}>
-          <p className='animate-spin'>Loading</p>
+          <Loading />
         </ResponsiveProvider>
       ) : (
         <CardWrapProvider

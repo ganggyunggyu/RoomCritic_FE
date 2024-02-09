@@ -5,19 +5,18 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../components/AtomComponent/Input';
 import Button from '../components/AtomComponent/Button';
 import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
-
 import useSearchContents from '../hooks/useSearchContents';
+import Loading from '../components/Loading';
 export default function Serch() {
   const [searchValue, setSerchValue] = useState('');
   const { searchContentsQuery } = useSearchContents(searchValue);
   const isSearchValue = searchValue.length === 0;
+
   const navigator = useNavigate();
 
   const isDetailReview = (content) => {
     navigator(`/detail/${content.media_type}/${content.id}`);
   };
-
-  console.log(searchContentsQuery);
 
   return (
     <React.Fragment>
@@ -53,7 +52,7 @@ export default function Serch() {
       ) : (
         <React.Fragment>
           {searchContentsQuery.isLoading ? (
-            <p className='animate-spin'>loading</p>
+            <Loading />
           ) : (
             <CardWrapProvider
               title={'검색결과'}

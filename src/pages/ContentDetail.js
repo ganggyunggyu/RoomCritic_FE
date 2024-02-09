@@ -11,6 +11,7 @@ import Button from '../components/AtomComponent/Button';
 import { useRecoilValue } from 'recoil';
 import { isLoggedInState } from '../recoilAtoms';
 import useSeletedContentReviews from '../hooks/useSelectedContentReviewsQuery';
+import Loading from '../components/Loading';
 
 export default function ContentDetail() {
   const navigator = useNavigate();
@@ -27,12 +28,13 @@ export default function ContentDetail() {
   useEffect(() => {
     detailContentQuery.refetch();
     window.scrollTo(0, 0);
+    console.log('effect!');
   }, [mediaType, contentId]);
 
   return (
     <React.Fragment>
       {detailContentQuery.isLoading ? (
-        <p>loding</p>
+        <Loading />
       ) : (
         <React.Fragment>
           <DetailBackground path={detailContentQuery.data.data.backdrop_path} />
