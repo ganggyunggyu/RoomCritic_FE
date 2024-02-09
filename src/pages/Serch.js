@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../components/AtomComponent/Input';
 import Button from '../components/AtomComponent/Button';
 import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
-import useSearchContents from '../hooks/useSearchContents';
+import useSearchContents from '../hooks/content/useSearchContents';
 import Loading from '../components/Loading';
 export default function Serch() {
   const [searchValue, setSerchValue] = useState('');

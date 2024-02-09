@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
-import axiosConfig from '../api/axiosConfig';
+import axiosConfig from '../../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 
-const reviewCreate = async (reviewData) => {
+const reviewCreate = async (createData) => {
   try {
     const result = await axiosConfig.post(
       'review/create',
-      { reviewData },
+      { createData },
       { withCredentials: true },
     );
 
@@ -16,13 +16,13 @@ const reviewCreate = async (reviewData) => {
   }
 };
 
-const useReviewCreate = (reviewData) => {
+const useReviewCreate = (createData) => {
   const navigator = useNavigate();
   const createMutate = useMutation({
-    mutationFn: () => reviewCreate(reviewData),
+    mutationFn: () => reviewCreate(createData),
     onSuccess: () => {
       console.log('글쓰기 성공');
-      navigator(`/detail/${reviewData.contentType}/${reviewData.contentId}`);
+      navigator(`/detail/${createData.contentType}/${createData.contentId}`);
     },
     onError: () => {
       console.error('에러 발생');

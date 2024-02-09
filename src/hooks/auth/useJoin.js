@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axiosConfig from '../api/axiosConfig';
+import axiosConfig from '../../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 
 const useJoin = (requestUserInfo) => {

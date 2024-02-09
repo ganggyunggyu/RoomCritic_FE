@@ -5,7 +5,7 @@ import FormHeader from '../components/FormHeader';
 import Button from '../components/AtomComponent/Button';
 import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
 
-import useJoin from '../hooks/useJoin';
+import useJoin from '../hooks/auth/useJoin';
 import { inputHandler } from '../util/inputValue';
 import { emailRegTest, isSame, isTrim, PasswordRegTest, phoneNumberRegTest } from '../util/Regs';
 
@@ -76,7 +76,7 @@ export default function Join() {
   return (
     <ResponsiveProvider direction={'col'}>
       <FormHeader text={'회원가입'} />
-      <form action="" className="flex flex-col gap-3 md:w-1/2 w-full pb-10">
+      <form action='' className='flex flex-col gap-3 md:w-1/2 w-full pb-10'>
         {FormItems.map((FormItem, i) => {
           return (
             <Input
@@ -100,14 +100,14 @@ export default function Join() {
             />
           );
         })}
-        {data && <p className="pt-3 text-red-400">{data}</p>}
+        {data && <p className='pt-3 text-red-400'>{data}</p>}
         <Button
           onClick={submitJoin}
           disabled={!activeJoin}
           label={'회원가입'}
           bg={activeJoin ? 'main' : 'disable'}
           text={'white'}
-          className="mt-5"
+          className='mt-5'
         />
       </form>
     </ResponsiveProvider>

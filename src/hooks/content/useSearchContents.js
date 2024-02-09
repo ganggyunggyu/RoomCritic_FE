@@ -1,8 +1,7 @@
-import { useSetRecoilState } from 'recoil';
-
-import tmdbAxiosConfig from '../api/tmdbAxiosConfig';
 import { useQuery } from '@tanstack/react-query';
-import { searchContentsState } from '../recoilAtoms';
+import { useSetRecoilState } from 'recoil';
+import tmdbAxiosConfig from '../../api/tmdbAxiosConfig';
+import { searchContentsState } from '../../recoilAtoms';
 
 const useSearchContents = (searchValue) => {
   const setSerchContents = useSetRecoilState(searchContentsState);

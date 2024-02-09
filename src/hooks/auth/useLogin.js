@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
-import axiosConfig from '../api/axiosConfig';
-import { isLoggedInState, userInfoState } from '../recoilAtoms';
+import axiosConfig from '../../api/axiosConfig';
+import { isLoggedInState, userInfoState } from '../../recoilAtoms';
 
 const useLogin = (requestUserInfo) => {
   const navigator = useNavigate();

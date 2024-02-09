@@ -3,7 +3,7 @@ import FormHeader from '../components/FormHeader';
 import Input from '../components/AtomComponent/Input';
 import Button from '../components/AtomComponent/Button';
 import { useNavigate } from 'react-router-dom';
-import useLogin from '../hooks/useLogin';
+import useLogin from '../hooks/auth/useLogin';
 import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
 import { inputHandler } from '../util/inputValue';
 import { PasswordRegTest, emailRegTest } from '../util/Regs';

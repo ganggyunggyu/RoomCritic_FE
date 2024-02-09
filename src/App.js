@@ -15,7 +15,7 @@ import ReviewDetail from './pages/ReviewDetail';
 import DarkModeButton from './components/DarkModeButton';
 import KakaoLogin from './pages/KakaoLogin';
 import useDarkMode from './hooks/useDarkMode';
-import useLogin from './hooks/useLogin';
+import useLogin from './hooks/auth/useLogin';
 
 function App() {
   const { darkMode, toggleDarkMode } = useDarkMode();

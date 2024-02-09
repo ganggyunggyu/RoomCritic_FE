@@ -1,4 +1,4 @@
-import tmdbAxiosConfig from '../api/tmdbAxiosConfig';
+import tmdbAxiosConfig from '../../api/tmdbAxiosConfig';
 
 import { useQuery } from '@tanstack/react-query';
 

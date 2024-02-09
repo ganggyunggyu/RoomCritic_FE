@@ -1,15 +1,15 @@
 import { useMutation } from '@tanstack/react-query';
-import axiosConfig from '../api/axiosConfig';
+import axiosConfig from '../../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
 
 const reviewDelete = (reviewId, userId) => {
-  const data = {
+  const deleteData = {
     reviewId: reviewId,
     userId: userId,
   };
   try {
     const result = axiosConfig.delete('review/delete', {
-      data: data,
+      data: deleteData,
     });
     return result;
   } catch (error) {

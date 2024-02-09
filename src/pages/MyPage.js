@@ -7,7 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
 import CardWrapProvider from '../components/WrapProvider/CardWrapProvider';
-import useReviewFetch from '../hooks/useReviewFetch';
+import useReviewFetch from '../hooks/review/useReviewFetch';
 
 export default function MyPage() {
   const { userId } = useParams();

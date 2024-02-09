@@ -4,14 +4,14 @@ import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../recoilAtoms';
 
 import { formatDateWithTime } from '../util/Regs';
-import Contents from './Contents';
+import CategoryReviewList from '../components/CategoryReviewList';
 import Footer from '../components/Footer';
 import DetailBackground from '../components/DetailBackground';
 import Button from '../components/AtomComponent/Button';
 import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
 import StarIcon from '../icons/StarIcon';
-import useReviewDelete from '../hooks/useReviewDelete';
-import useReviewSelect from '../hooks/useReviewSelect';
+import useReviewDelete from '../hooks/review/useReviewDelete';
+import useReviewSelect from '../hooks/review/useReviewSelect';
 import Loading from '../components/Loading';
 
 export default function ReviewDetail() {
@@ -89,7 +89,7 @@ export default function ReviewDetail() {
           </ResponsiveProvider>
         </React.Fragment>
       )}
-      <Contents />
+      <CategoryReviewList />
       <Footer />
     </React.Fragment>
   );

@@ -7,8 +7,8 @@ import StarIcon from '../icons/StarIcon';
 import Button from '../components/AtomComponent/Button';
 import DetailBackground from '../components/DetailBackground';
 
-import useReviewCreate from '../hooks/useReviewCreate';
-import useContentFetch from '../hooks/useContentFetch';
+import useReviewCreate from '../hooks/review/useReviewCreate';
+import useContentFetch from '../hooks/content/useContentFetch';
 export default function Create() {
   const userInfo = useRecoilValue(userInfoState);
   const { mediaType, contentId } = useParams();
