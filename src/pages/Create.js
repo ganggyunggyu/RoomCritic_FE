@@ -1,86 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import tmdbAxiosConfig from '../api/tmdbAxiosConfig';
-import axiosConfig from '../api/axiosConfig';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 import { userInfoState } from '../recoilAtoms';
 import { useRecoilValue } from 'recoil';
 import StarIcon from '../icons/StarIcon';
 import Button from '../components/AtomComponent/Button';
 import DetailBackground from '../components/DetailBackground';
-import { useMutation } from '@tanstack/react-query';
+
+import useReviewCreate from '../hooks/useReviewCreate';
+import useContentFetch from '../hooks/useContentFetch';
 export default function Create() {
-  const navigator = useNavigate();
   const userInfo = useRecoilValue(userInfoState);
   const { mediaType, contentId } = useParams();
-  const [content, setContent] = useState({});
+  const { detailContentQuery } = useContentFetch(mediaType, contentId);
   const [review, setReview] = useState('');
   const [addReview, setAddReview] = useState('');
-  const [grade, setGrade] = useState(1);
+  const [grade, setGrade] = useState(3);
+
+  const reviewData = {
+    userId: userInfo._id,
+    userName: userInfo.displayName,
+    lineReview: review,
+    longReview: addReview,
+    grade: grade,
+    contentPosterImg: `https://www.themoviedb.org/t/p/original${detailContentQuery.data.data.poster_path}`,
+    contentBackdropImg: `https://www.themoviedb.org/t/p/original${detailContentQuery.data.data.backdrop_path}`,
+    contentName: detailContentQuery.data.data.title || detailContentQuery.data.data.name,
+    contentId: contentId,
+    contentType: mediaType,
+  };
+  const { createMutate } = useReviewCreate(reviewData);
+
   const stars = [1, 2, 3, 4, 5];
-
-  const createReview = async () => {
-    const reviewData = {
-      userId: userInfo._id,
-      userName: userInfo.displayName,
-      lineReview: review,
-      longReview: addReview,
-      grade: grade,
-      contentPosterImg: `https://www.themoviedb.org/t/p/original${content.poster_path}`,
-      contentBackdropImg: `https://www.themoviedb.org/t/p/original${content.backdrop_path}`,
-      contentName: content.title || content.name,
-      contentId: contentId,
-      contentType: mediaType,
-    };
-    try {
-      const result = await axiosConfig.post(
-        'review/create',
-        { reviewData },
-        { withCredentials: true },
-      );
-      navigator(`/detail/${mediaType}/${contentId}`);
-      console.log(result.data.message);
-      console.log(result);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const createMutate = useMutation({
-    mutationFn: createReview,
-    onSuccess: () => {
-      console.log('요청 성공');
-    },
-    onError: () => {
-      console.error('에러 발생');
-    },
-    onSettled: () => {
-      console.log('결과에 관계 없이 무언가 실행됨');
-    },
-  });
-
-  const fetchContent = async () => {
-    try {
-      const result = await tmdbAxiosConfig.get(`/${mediaType}/${contentId}`);
-
-      setContent(result.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    fetchContent();
-  }, []);
-
   const isGrade = (star) => {
     setGrade(star);
   };
 
   return (
     <React.Fragment>
-      <DetailBackground path={content.backdrop_path} />
+      <DetailBackground path={detailContentQuery.data.data.backdrop_path} />
       <div className='w-full flex flex-col justify-center items-center text-center z-10 pb-20'>
         <div className='w-10/12 sm:w-6/12 flex flex-col justify-center items-center'>
-          <h1 className='text-4xl pt-10 pb-5'>{content.title || content.name}</h1>
+          <h1 className='text-4xl pt-10 pb-5'>
+            {detailContentQuery.data.data.title || detailContentQuery.data.data.name}
+          </h1>
           <p className='text-3xl pb-5'>감상평을 쓰자</p>
           <div className='flex items-center justify-center gap-1'>
             {stars.map((star, i) => {
@@ -110,12 +73,12 @@ export default function Create() {
               onChange={(e) => {
                 setReview(e.target.value);
               }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  e.preventDefault();
-                  createReview();
-                }
-              }}
+              // onKeyDown={(e) => {
+              //   if (e.key === 'Enter') {
+              //     e.preventDefault();
+              //     createMutate.mutate();
+              //   }
+              // }}
             />
           </div>
           <div className='w-full py-5'>
@@ -129,10 +92,10 @@ export default function Create() {
               // onKeyDown={(e) => {
               //   if (e.key === 'Enter') {
               //     e.preventDefault();
-              //     createReview();
+              //     createMutate.mutate();
               //   }
               // }}
-            ></textarea>
+            />
           </div>
           <div className='w-full flex'>
             <div className='grow' />
