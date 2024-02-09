@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import axiosConfig from '../../api/axiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 const reviewUpdate = async (updateData) => {
   console.log(updateData);
@@ -9,11 +10,12 @@ const reviewUpdate = async (updateData) => {
 };
 
 const useReviewUpdate = (updateData) => {
+  const navigator = useNavigate();
   const updateMutate = useMutation({
     mutationFn: () => reviewUpdate(updateData),
     onSuccess: () => {
       console.log('수정 성공');
-      navigator(`/detail/${updateData.userId}/${updateData.reviewId}`);
+      navigator(`/detail/review/${updateData.userId}/${updateData.reviewId}`);
     },
     onError: () => {
       console.error('에러 발생');

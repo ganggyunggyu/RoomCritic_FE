@@ -16,6 +16,7 @@ import DarkModeButton from './components/DarkModeButton';
 import KakaoLogin from './pages/KakaoLogin';
 import useDarkMode from './hooks/useDarkMode';
 import useLogin from './hooks/auth/useLogin';
+import Update from './pages/Update';
 
 function App() {
   const { darkMode, toggleDarkMode } = useDarkMode();
@@ -38,6 +39,7 @@ function App() {
           <Route path='/detail/:mediaType/:contentId' element={<ContentDetail />} />
           <Route path='/detail/review/:userId/:reviewId' element={<ReviewDetail />} />
           <Route path='/create/:mediaType/:contentId' element={<Create />} />
+          <Route path='/update/:userId/:reviewId' element={<Update />} />
           <Route path='/auth' element={<KakaoLogin />} />
         </Routes>
       </div>

@@ -21,6 +21,9 @@ export default function ReviewDetail() {
   const { selectReviewQuery } = useReviewSelect(userId, reviewId);
   const { reviewDeleteMutate } = useReviewDelete(reviewId, userId);
   const user = useRecoilValue(userInfoState);
+  const directUpdate = () => {
+    navigator(`/update/${userId}/${reviewId}`);
+  };
 
   useEffect(() => {
     if (!selectReviewQuery.isLoading) {
@@ -63,15 +66,20 @@ export default function ReviewDetail() {
             <Button label={'좋아요 🤩'} bg={'main'} className={'lg:w-4/12 w-full text-lg'} />
             <Button label={'별로에요 🧐'} bg={'main'} className={'lg:w-4/12 w-full text-lg'} />
             {user._id === selectReviewQuery.data.data.review.userId && (
-              <>
+              <React.Fragment>
                 <Button
                   onClick={reviewDeleteMutate.mutate}
                   label={'삭제'}
                   bg={'main'}
                   className={'lg:w-4/12 w-full text-lg'}
                 />
-                <Button label={'수정'} bg={'main'} className={'lg:w-4/12 w-full text-lg'} />
-              </>
+                <Button
+                  onClick={directUpdate}
+                  label={'수정'}
+                  bg={'main'}
+                  className={'lg:w-4/12 w-full text-lg'}
+                />
+              </React.Fragment>
             )}
           </ResponsiveProvider>
           <ResponsiveProvider>
