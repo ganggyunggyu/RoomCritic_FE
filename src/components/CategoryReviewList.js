@@ -1,22 +1,25 @@
-import { useRecoilValue } from 'recoil';
-import CardWrapProvider from '../components/WrapProvider/CardWrapProvider';
-import { isLoggedInState, searchContentsState } from '../recoilAtoms';
-import useReviewFetch from '../hooks/useReviewFetch';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
-import Loading from '../components/Loading';
-const Contents = () => {
-  const navigator = useNavigate();
-  const { latestReviewsQuery, tvContentReviewsQuery, movieContentReviewsQuery } = useReviewFetch();
-  const redirectContent = (content) => {
-    navigator(
-      `/detail/${content.contentType || content.media_type}/${content.contentId || content.id}`,
-    );
-  };
+import { useRecoilValue } from 'recoil';
+import { isLoggedInState, searchContentsState } from '../recoilAtoms';
+import useReviewFetch from '../hooks/review/useReviewFetch';
+import CardWrapProvider from './WrapProvider/CardWrapProvider';
+import ResponsiveProvider from './WrapProvider/ResponsiveProvider';
+import Loading from './Loading';
 
+const CategoryReviewList = () => {
+  const navigator = useNavigate();
   const isLoggedIn = useRecoilValue(isLoggedInState);
   const searchContents = useRecoilValue(searchContentsState);
+  const { latestReviewsQuery, tvContentReviewsQuery, movieContentReviewsQuery } = useReviewFetch();
+  const redirectContent = (content) => {
+    window.scrollTo(0, 0);
+    navigator(`/detail/${content.media_type}/${content.id}`);
+  };
+  const redirectReview = (review) => {
+    window.scrollTo(0, 0);
+    navigator(`/detail/review/${review.userId}/${review._id}`);
+  };
 
   return (
     <React.Fragment>
@@ -35,7 +38,7 @@ const Contents = () => {
         <CardWrapProvider
           title={'최근에 작성된 리뷰들'}
           cardList={latestReviewsQuery.data.data.reviews}
-          onClick={redirectContent}
+          onClick={redirectReview}
         />
       )}
       {tvContentReviewsQuery.isPending ? (
@@ -46,7 +49,7 @@ const Contents = () => {
         <CardWrapProvider
           title={'TV 시리즈 리뷰들'}
           cardList={tvContentReviewsQuery.data.data.tvContentReviews}
-          onClick={redirectContent}
+          onClick={redirectReview}
         />
       )}
       {movieContentReviewsQuery.isPending ? (
@@ -57,10 +60,10 @@ const Contents = () => {
         <CardWrapProvider
           title={'영화 리뷰들'}
           cardList={movieContentReviewsQuery.data.data.movieContentReviews}
-          onClick={redirectContent}
+          onClick={redirectReview}
         />
       )}
     </React.Fragment>
   );
 };
-export default Contents;
+export default CategoryReviewList;

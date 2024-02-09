@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import ContentInfo from '../components/ContentDetail/ContentInfo';
 import { useNavigate, useParams } from 'react-router-dom';
 import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
-import useContentFetch from '../hooks/useContentFetch';
+import useContentFetch from '../hooks/content/useContentFetch';
 import CardWrapProvider from '../components/WrapProvider/CardWrapProvider';
 import Footer from '../components/Footer';
-import Contents from './Contents';
+import CategoryReviewList from '../components/CategoryReviewList';
 import DetailBackground from '../components/DetailBackground';
 import Button from '../components/AtomComponent/Button';
 import { useRecoilValue } from 'recoil';
 import { isLoggedInState } from '../recoilAtoms';
-import useSeletedContentReviews from '../hooks/useSelectedContentReviewsQuery';
+import useSeletedContentReviews from '../hooks/content/useSelectedContentReviewsQuery';
 import Loading from '../components/Loading';
 
 export default function ContentDetail() {
@@ -76,7 +76,7 @@ export default function ContentDetail() {
             </React.Fragment>
           )}
 
-          <Contents />
+          <CategoryReviewList />
           <Footer />
         </React.Fragment>
       )}

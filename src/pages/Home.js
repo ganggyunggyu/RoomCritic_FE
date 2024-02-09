@@ -1,13 +1,13 @@
 import React from 'react';
 import Banner from '../components/Banner';
 import Footer from '../components/Footer';
-import Contents from './Contents';
+import CategoryReviewList from '../components/CategoryReviewList';
 
 export default function Home() {
   return (
     <React.Fragment>
       <Banner />
-      <Contents />
+      <CategoryReviewList />
       <Footer />
     </React.Fragment>
   );
