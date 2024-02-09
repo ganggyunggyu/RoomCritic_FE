@@ -10,7 +10,7 @@ export const ButtonVariants = cva(
     variants: {
       bg: {
         default: `bg-slate-200`,
-        main: `bg-red-400 hover:bg-red-500`,
+        main: `hover:bg-black hover:opacity-50`,
         disable: `bg-slate-400 hover:bg-slate-500`,
       },
       text: {
