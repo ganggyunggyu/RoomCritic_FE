@@ -45,7 +45,7 @@ export default function ReviewDetail() {
           <DetailBackground path={selectReviewQuery.data.data.review.contentBackdropImg} />
           <ResponsiveProvider direction={'col'} className={'gap-5 z-10'}>
             <p>
-              {selectReviewQuery.data.data.review.userName}님의
+              {selectReviewQuery.data.data.review.userName}님의{' '}
               {selectReviewQuery.data.data.review.contentName} 리뷰
             </p>
             <p>{formatDateWithTime(selectReviewQuery.data.data.review.createTime)} 작성</p>
@@ -63,21 +63,21 @@ export default function ReviewDetail() {
             </p>
           </ResponsiveProvider>
           <ResponsiveProvider direction={'col'} className={'gap-5 z-10 lg:flex-row transition-all'}>
-            <Button label={'좋아요 🤩'} bg={'main'} className={'lg:w-4/12 w-full text-lg'} />
-            <Button label={'별로에요 🧐'} bg={'main'} className={'lg:w-4/12 w-full text-lg'} />
+            <Button label={'좋아요 🤩'} bg={'main'} className={'lg:w-6/12 w-full text-lg'} />
+            <Button label={'별로에요 🧐'} bg={'main'} className={'lg:w-6/12 w-full text-lg'} />
             {user._id === selectReviewQuery.data.data.review.userId && (
               <React.Fragment>
-                <Button
-                  onClick={reviewDeleteMutate.mutate}
-                  label={'삭제'}
-                  bg={'main'}
-                  className={'lg:w-4/12 w-full text-lg'}
-                />
                 <Button
                   onClick={directUpdate}
                   label={'수정'}
                   bg={'main'}
-                  className={'lg:w-4/12 w-full text-lg'}
+                  className={'lg:w-3/12 w-full text-lg'}
+                />
+                <Button
+                  onClick={reviewDeleteMutate.mutate}
+                  label={'삭제'}
+                  bg={'alert'}
+                  className={'lg:w-3/12 w-full text-lg'}
                 />
               </React.Fragment>
             )}

@@ -40,20 +40,20 @@ export default function ContentDetail() {
           <DetailBackground path={detailContentQuery.data.data.backdrop_path} />
           <ContentInfo content={detailContentQuery.data.data} />
           <ResponsiveProvider direction={'col'} className={'gap-5 z-10 lg:flex-row'}>
-            <Button label={'좋아요 🤩'} bg={'main'} className={'lg:w-4/12 w-full text-lg'} />
-            <Button label={'별로에요 🧐'} bg={'main'} className={'lg:w-4/12 w-full text-lg'} />
+            <Button label={'봤어요 🤩'} bg={'main'} className={'lg:w-6/12 w-full text-lg'} />
+            <Button label={'보고싶어요 🧐'} bg={'main'} className={'lg:w-6/12 w-full text-lg'} />
             {isLoggedIn ? (
               <Button
                 label={'리뷰 쓰러가기'}
                 bg={'main'}
-                className={'lg:w-4/12 w-full text-lg'}
+                className={'lg:w-3/12 w-full text-lg'}
                 onClick={() => navigator(`/create/${mediaType}/${contentId}`)}
               />
             ) : (
               <Button
-                label={'로그인하고 리뷰쓰자!'}
+                label={'로그인'}
                 bg={'main'}
-                className={'lg:w-4/12 w-full text-lg'}
+                className={'lg:w-3/12 w-full text-lg'}
                 onClick={() => navigator(`/login`)}
               />
             )}
