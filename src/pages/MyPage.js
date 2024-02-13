@@ -30,6 +30,7 @@ export default function MyPage() {
         cardList={myReviews}
         onClick={redirectReview}
       />
+      <div className='w-screen h-screen'></div>
     </React.Fragment>
   );
 }
