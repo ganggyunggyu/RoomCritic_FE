@@ -8,7 +8,7 @@ export default function Sun() {
       viewBox='0 0 24 24'
       strokeWidth={1.5}
       stroke='currentColor'
-      className='w-9 h-9 fill-yellow-300 stroke-yellow-300 bg-black'
+      className='w-9 h-9 fill-yellow-300 stroke-yellow-300'
     >
       <path
         strokeLinecap='round'
