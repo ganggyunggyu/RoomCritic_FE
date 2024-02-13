@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { darkModeClassesState, isDarkModeState } from '../recoilAtoms';
-import { json } from 'react-router-dom';
 
 const useDarkMode = () => {
   const [isDarkMode, setIsDarkMode] = useRecoilState(isDarkModeState);
@@ -19,16 +18,24 @@ const useDarkMode = () => {
   useEffect(() => {
     if (isDarkMode) {
       setDarkModeClasses('bg-zinc-800 text-white');
+      document.body.style.backgroundColor = '#27272A';
+      document.body.style.color = 'white';
     } else {
       setDarkModeClasses('bg-white text-black');
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color = '#27272A';
     }
   }, [isDarkMode, darkModeClasses]);
 
   useEffect(() => {
     if (isDarkMode) {
       setDarkModeClasses('bg-zinc-800 text-white');
+      document.body.style.backgroundColor = '#27272A';
+      document.body.style.color = 'white';
     } else {
       setDarkModeClasses('bg-white text-black');
+      document.body.style.backgroundColor = 'white';
+      document.body.style.color = '#27272A';
     }
   }, [isDarkMode]);
 
