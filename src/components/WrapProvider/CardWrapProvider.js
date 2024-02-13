@@ -22,8 +22,8 @@ const CardWrapProvider = ({ title, cardList, onClick }) => {
   return (
     <ResponsiveProvider direction={'row'}>
       {!cardList && <Loading />}
-      {!cardList.length && <Loading />}
-      {/* {cardList.length === 0 && '작품이 없습니다.'} */}
+      {!cardList.length && cardList.length !== 0 && <Loading />}
+      {cardList.length === 0 && '작품이 없습니다.'}
       {cardList.length > 0 && (
         <div className='w-full z-10 relative'>
           <div className='absolute inset-y-0 left-0 z-20 rounded-full opacity-50 flex items-center justify-center hover:opacity-80 transition-all'>

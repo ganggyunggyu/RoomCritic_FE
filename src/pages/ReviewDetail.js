@@ -49,11 +49,13 @@ export default function ReviewDetail() {
               {selectReviewQuery.data.data.review.contentName} 리뷰
             </p>
             <p>{formatDateWithTime(selectReviewQuery.data.data.review.createTime)} 작성</p>
-            <p className='border border-b-4 p-2 text-center leading-loose'>
+            <p className='border border-b-4 p-2 text-center leading-loose text-3xl md:text-5xl'>
               {selectReviewQuery.data.data.review.lineReview}
             </p>
             {selectReviewQuery.data.data.review.longReview !== '' && (
-              <p className='leading-loose'>{selectReviewQuery.data.data.review.longReview}</p>
+              <p className='leading-loose text-lg md:text-5xl'>
+                {selectReviewQuery.data.data.review.longReview}
+              </p>
             )}
 
             <p className='flex flex-row gap-1'>
