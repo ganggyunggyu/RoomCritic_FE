@@ -68,7 +68,7 @@ const CardWrapProvider = ({ title, cardList, onClick }) => {
               </svg>
             </button>
           </div>
-          <h1 className='md:text-3xl text-lg'>{title}</h1>
+          <p className='md:text-3xl text-lg'>{title}</p>
           <div
             ref={cardConatinerRef}
             className='flex overflow-x-scroll overflow-y-hidden gap-5 py-5 smooth-scroll'
