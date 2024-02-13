@@ -3,6 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Protest+Strike&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Protest+Strike&display=swap');
 
 @font-face {
   font-family: 'DNFForgedBlade';
@@ -33,8 +35,33 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'ChosunGu';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGu.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GangwonEdu_OTFBoldA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   line-height: 1;
-  font-family: 'DNFForgedBlade';
+  /* font-family: 'DNFForgedBlade'; */
   background-color: black;
+}
+body {
+  font-family: 'GangwonEdu_OTFBoldA';
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1 {
+  font-family: 'Protest Strike', sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }

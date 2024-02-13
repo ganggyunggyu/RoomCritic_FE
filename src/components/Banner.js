@@ -39,8 +39,8 @@ const Banner = () => {
   }, []);
 
   const bannerButton = (e, i) => {
-    e.preventDefault();
     setBannerIndex(i);
+    e.preventDefault();
   };
   const nextBannerButton = (e) => {
     setBannerIndex((prevIndex) => (prevIndex + 1) % BannerImgs.length);
@@ -55,7 +55,7 @@ const Banner = () => {
       <div
         style={{
           backgroundImage: `url(${BannerImgs[bannerIndex]})`,
-          filter: 'blur(1px)',
+          // filter: 'blur(1px)',
           backgroundSize: '100% 100%',
           position: 'relative',
           width: '100vw',
@@ -86,24 +86,22 @@ const Banner = () => {
             return (
               <button
                 key={i}
-                style={{ transition: '0.5s' }}
                 onClick={(e) => {
                   bannerButton(e, i);
                 }}
-                className={`w-2 h-2 rounded-full ${
-                  bannerIndex === i ? 'bg-slate-200' : 'bg-slate-600'
+                className={`w-2 h-2 rounded-full transition-1s ${
+                  bannerIndex === i ? 'bg-slate-200 w-8' : 'bg-slate-600'
                 }`}
               ></button>
             );
           })}
         </div>
       </div>
-      <div className='flex items-center opacity-95 text-white absolute z-10 top-0 bottom-0 left-20 '>
-        <div className='md:w-7/12 w-10/12 flex flex-col justify-center gap-3 transition-all min-w-fit'>
-          <p className='md:text-3xl text-md'>ROOM CRITIC</p>
-          <p className='text-sm md:text-lg'>Room = 방</p>
-          <p className='text-sm md:text-lg'>Critic = 평론가</p>
-        </div>
+      <div className='md:w-5/12 w-6/12 flex items-center opacity-40 blur-lg absolute top-0 bottom-0 pl-20 pr-10 bg-black pointer-events-none' />
+      <div className='md:w-7/12 w-10/12 flex flex-col justify-center gap-3 transition-all min-w-fit absolute top-0 bottom-0 left-20'>
+        <p className='md:text-5xl text-2xl text-violet-300 transition-1s'>ROOM CRITIC</p>
+        {/* <p className='text-sm md:text-lg'>Room = 방</p>
+        <p className='text-sm md:text-lg'>Critic = 평론가</p> */}
       </div>
     </div>
   );

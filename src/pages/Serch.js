@@ -46,7 +46,7 @@ export default function Serch() {
       </ResponsiveProvider>
       {isSearchValue ? (
         <React.Fragment>
-          <p className='pt-14 text-8xl animate-bounce'>👆</p>
+          <p className='pt-14 text-8xl animate-bounce pointer-events-none'>👆</p>
           <p className='text-xl'>원하는 작품을 검색해보세요!</p>
         </React.Fragment>
       ) : (

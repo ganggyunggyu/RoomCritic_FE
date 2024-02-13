@@ -83,8 +83,8 @@ export default function ReviewDetail() {
             )}
           </ResponsiveProvider>
           <ResponsiveProvider>
-            <h1
-              className='text-xl cursor-pointer hover:text-red-400 z-10'
+            <p
+              className='text-xl cursor-pointer hover:text-violet-400 z-10'
               onClick={() => {
                 navigator(
                   `/detail/${selectReviewQuery.data.data.review.contentType}/${selectReviewQuery.data.data.review.contentId}`,
@@ -93,7 +93,7 @@ export default function ReviewDetail() {
             >
               {selectReviewQuery.data.data.review.contentName} 다른 리뷰도 보러가기 !{' '}
               <span className='text-3xl'>👈</span>
-            </h1>
+            </p>
           </ResponsiveProvider>
         </React.Fragment>
       )}
