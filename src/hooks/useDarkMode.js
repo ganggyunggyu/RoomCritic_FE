@@ -1,30 +1,38 @@
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { darkModeState } from '../recoilAtoms';
+import { darkModeClassesState, isDarkModeState } from '../recoilAtoms';
+import { json } from 'react-router-dom';
 
 const useDarkMode = () => {
-  const [darkMode, setDarkMode] = useRecoilState(darkModeState);
+  const [isDarkMode, setIsDarkMode] = useRecoilState(isDarkModeState);
+  const [darkModeClasses, setDarkModeClasses] = useRecoilState(darkModeClassesState);
 
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    localStorage.setItem('darkMode', !darkMode);
+    setIsDarkMode(!isDarkMode);
+    localStorage.setItem('isDarkMode', !isDarkMode);
   };
 
   useEffect(() => {
-    setDarkMode(JSON.stringify(localStorage.getItem('darkMode')));
+    setIsDarkMode(JSON.parse(localStorage.getItem('isDarkMode')));
   }, []);
 
   useEffect(() => {
-    if (darkMode) {
-      document.body.style.backgroundColor = '#27272A';
-      document.body.style.color = 'white';
+    if (isDarkMode) {
+      setDarkModeClasses('bg-zinc-800 text-white');
     } else {
-      document.body.style.backgroundColor = 'white';
-      document.body.style.color = '#27272A';
+      setDarkModeClasses('bg-white text-black');
     }
-  }, [darkMode]);
+  }, [isDarkMode, darkModeClasses]);
 
-  return { darkMode, toggleDarkMode };
+  useEffect(() => {
+    if (isDarkMode) {
+      setDarkModeClasses('bg-zinc-800 text-white');
+    } else {
+      setDarkModeClasses('bg-white text-black');
+    }
+  }, [isDarkMode]);
+
+  return { isDarkMode, darkModeClasses, toggleDarkMode };
 };
 
 export default useDarkMode;

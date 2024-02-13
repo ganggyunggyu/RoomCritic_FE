@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { darkModeState, isLoggedInState, userInfoState } from '../recoilAtoms';
+import { isLoggedInState, userInfoState } from '../recoilAtoms';
 import axiosConfig from '../api/axiosConfig';
+import useDarkMode from '../hooks/useDarkMode';
 
 export default function Header() {
   const navigator = useNavigate();
   const userInfo = useRecoilValue(userInfoState);
   const isLoggedIn = useRecoilValue(isLoggedInState);
-  const darkMode = useRecoilValue(darkModeState);
+  const { darkModeClasses } = useDarkMode();
 
   const submitLogout = async () => {
     try {
@@ -24,9 +25,7 @@ export default function Header() {
 
   return (
     <header
-      className={`${
-        darkMode ? 'bg-zinc-800' : 'bg-white'
-      } h-12 fixed top-0 left-0 right-0 p-3 flex items-center justify-center shadow-lg z-20`}
+      className={`h-12 fixed top-0 left-0 right-0 p-3 flex items-center justify-center shadow-lg z-20 ${darkModeClasses}`}
     >
       <nav className='flex justify-around gap-3 md:w-7/12 w-10/12 transition-all'>
         <div className='hover:text-violet-400 transition-all'>

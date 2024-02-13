@@ -19,7 +19,7 @@ import useLogin from './hooks/auth/useLogin';
 import Update from './pages/Update';
 
 function App() {
-  const { darkMode, toggleDarkMode } = useDarkMode();
+  const { isDarkMode, darkModeClasses, toggleDarkMode } = useDarkMode();
   const { fetchLogin } = useLogin();
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function App() {
   }, []);
 
   return (
-    <div className={`${darkMode ? 'bg-zinc-800 text-white' : ''} transition-all `}>
+    <div className={`transition-all ${darkModeClasses}`}>
       <Header />
       <div className='mt-12 flex flex-col items-center justify-center'>
         <Routes>
@@ -43,7 +43,7 @@ function App() {
           <Route path='/auth' element={<KakaoLogin />} />
         </Routes>
       </div>
-      <DarkModeButton darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <DarkModeButton darkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
     </div>
   );
 }

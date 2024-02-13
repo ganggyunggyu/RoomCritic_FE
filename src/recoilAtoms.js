@@ -20,7 +20,11 @@ export const selectReviewState = atom({
   key: 'selectReviewState',
   default: {},
 });
-export const darkModeState = atom({
-  key: 'darkModeState',
+export const isDarkModeState = atom({
+  key: 'isDarkModeState',
   default: false,
+});
+export const darkModeClassesState = atom({
+  key: 'darkModeClassesState',
+  default: '',
 });
