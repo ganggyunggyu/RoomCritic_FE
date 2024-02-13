@@ -7,31 +7,41 @@ import useLogin from '../hooks/auth/useLogin';
 import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
 import { inputHandler } from '../util/inputValue';
 import { PasswordRegTest, emailRegTest } from '../util/Regs';
+import EyeIcon from '../icons/EyeIcon';
 
 export default function Login() {
   const navigator = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [passwordType, setPasswordType] = useState('password');
+
   const { submitLogin, data } = useLogin({ email: email, password: password });
   const directJoin = () => {
     navigator('/join');
   };
 
+  const toggleInputType = () => {
+    passwordType === 'password' ? setPasswordType('text') : setPasswordType('password');
+  };
   const LoginInputs = [
     {
       value: email,
       setValue: setEmail,
       type: 'email',
-      placeholder: '이메일',
+      label: '이메일',
       isReg: emailRegTest(email),
     },
     {
       value: password,
       setValue: setPassword,
-      type: 'password',
-      placeholder: '비밀번호',
+      type: passwordType,
+      label: '비밀번호',
       isReg: PasswordRegTest(password),
+      button: {
+        icon: <EyeIcon />,
+        onClick: toggleInputType,
+      },
     },
   ];
 
@@ -45,7 +55,7 @@ export default function Login() {
   return (
     <ResponsiveProvider direction={'col'}>
       <FormHeader text={'로그인'} />
-      <form action='' className='flex flex-col gap-3 md:w-1/2 w-full pb-10 transition-all'>
+      <form action='' className='flex flex-col gap-5 md:w-1/2 w-full pb-10 transition-all'>
         {LoginInputs.map((FormItem, i) => {
           return (
             <Input
@@ -61,7 +71,8 @@ export default function Login() {
                   submitLogin();
                 }
               }}
-              label={FormItem.placeholder}
+              label={FormItem.label}
+              button={FormItem.button}
             />
           );
         })}
