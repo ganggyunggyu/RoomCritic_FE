@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { TMDMAPIKEY } from '../config';
 
-const instance = axios.create({
+const tmdbAxiosConfig = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
   params: {
     api_key: TMDMAPIKEY,
@@ -9,4 +9,4 @@ const instance = axios.create({
   },
 });
 
-export default instance;
+export default tmdbAxiosConfig;

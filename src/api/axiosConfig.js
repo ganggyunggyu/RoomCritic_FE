@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { HOST } from '../config';
 
-const instance = axios.create({
+const axiosConfig = axios.create({
   baseURL: HOST,
   headers: {
     Authorization: 'Bearer your-token',
@@ -9,4 +9,4 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-export default instance;
+export default axiosConfig;
