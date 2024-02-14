@@ -3,7 +3,7 @@ import Card from '../Card/Card';
 import ResponsiveProvider from './ResponsiveProvider';
 import Loading from '../Loading';
 
-const CardWrapProvider = ({ title, cardList, onClick }) => {
+const CardWrapProvider = ({ title, cardList, onClick, isHover }) => {
   const cardConatinerRef = React.useRef(null);
 
   const handleScroll = (direction) => {
@@ -81,6 +81,7 @@ const CardWrapProvider = ({ title, cardList, onClick }) => {
                   onClick={() => {
                     onClick(content);
                   }}
+                  isHover={isHover}
                 />
               );
             })}
