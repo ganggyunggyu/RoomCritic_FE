@@ -71,6 +71,7 @@ export default function ContentDetail() {
                   }에 남겨진 리뷰`}
                   cardList={selectedContentReviewsQuery.data.data.reviews}
                   onClick={redirectReview}
+                  isHover={true}
                 />
               )}
             </React.Fragment>

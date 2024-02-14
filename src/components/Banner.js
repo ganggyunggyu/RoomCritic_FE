@@ -129,7 +129,7 @@ const BannerReview = ({ title, reviews, link, movie_color }) => {
   return (
     <React.Fragment>
       <div className='md:w-5/12 w-6/12 flex items-center opacity-40 blur-lg absolute top-0 bottom-0 pl-20 pr-10 bg-black pointer-events-none transition-all' />
-      <div className='md:w-7/12 w-10/12 flex flex-col justify-center gap-1 md:gap-3 transition-all max-w-fit absolute top-0 bottom-0 left-12'>
+      <div className='md:w-7/12 w-10/12 flex flex-col justify-center gap-1 md:gap-3 transition-all max-w-fit absolute top-0 bottom-0 left-12 md:left-40'>
         <p className={`md:text-5xl text-xl text-${movie_color}-300 transition-1s`}>{title}</p>
         {reviews.map((line, i) => {
           return (
@@ -139,11 +139,11 @@ const BannerReview = ({ title, reviews, link, movie_color }) => {
           );
         })}
         <Link
-          className={`text-${movie_color}-300 hover:text-${movie_color}-700 transition-all py-1`}
+          className={`text-${movie_color}-300 hover:text-${movie_color}-700 transition-all py-1 text-3xl`}
           // className={`text-violet-400 hover:text-violet-700 transition-all py-1`}
           to={link}
         >
-          <i>{title} 리뷰 쓰러가기</i>
+          <i>👉 {title} 리뷰 쓰러가기</i>
         </Link>
       </div>
     </React.Fragment>
