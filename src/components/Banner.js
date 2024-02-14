@@ -130,13 +130,17 @@ const BannerReview = ({ title, reviews, link, movie_color }) => {
     <React.Fragment>
       <div className='md:w-5/12 w-6/12 flex items-center opacity-40 blur-lg absolute top-0 bottom-0 pl-20 pr-10 bg-black pointer-events-none transition-all' />
       <div className='md:w-7/12 w-10/12 flex flex-col justify-center gap-1 md:gap-3 transition-all max-w-fit absolute top-0 bottom-0 left-12'>
-        <p className={`md:text-5xl text-xl text-violet-300 transition-1s`}>{title}</p>
+        <p className={`md:text-5xl text-xl text-${movie_color}-300 transition-1s`}>{title}</p>
         {reviews.map((line, i) => {
-          return <p className='text-xs md:text-lg max-w-fit text-white'>{line}</p>;
+          return (
+            <p key={i} className='text-xs md:text-lg max-w-fit text-white'>
+              {line}
+            </p>
+          );
         })}
         <Link
-          // className={`text-${movie_color}-300 hover:text-${movie_color}-700 transition-all py-1`}
-          className={`text-violet-400 hover:text-violet-700 transition-all py-1`}
+          className={`text-${movie_color}-300 hover:text-${movie_color}-700 transition-all py-1`}
+          // className={`text-violet-400 hover:text-violet-700 transition-all py-1`}
           to={link}
         >
           <i>{title} 리뷰 쓰러가기</i>
