@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import StarIcon from '../../icons/StarIcon';
 
 const CardHover = ({ review }) => {
-  const [stars, setStars] = useState([0, 0, 0, 0, 0]);
+  const [stars, setStars] = useState([]);
 
   return (
     <React.Fragment>

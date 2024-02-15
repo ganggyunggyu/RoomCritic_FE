@@ -17,6 +17,7 @@ import KakaoLogin from './pages/KakaoLogin';
 import useDarkMode from './hooks/useDarkMode';
 import useLogin from './hooks/auth/useLogin';
 import Update from './pages/Update';
+import { cn } from './util/cn';
 
 function App() {
   const { isDarkMode, darkModeClasses, toggleDarkMode } = useDarkMode();
@@ -27,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <div className={`transition-all ${darkModeClasses}`}>
+    <div className={cn(`${darkModeClasses} transition-all`)}>
       <Header />
       <div className='mt-12 flex flex-col items-center justify-center'>
         <Routes>
