@@ -19,11 +19,9 @@ const useDarkMode = () => {
     if (isDarkMode) {
       setDarkModeClasses('bg-zinc-800 text-white');
       document.body.style.backgroundColor = '#27272A';
-      document.body.style.color = 'white';
     } else {
       setDarkModeClasses('bg-white text-black');
       document.body.style.backgroundColor = 'white';
-      document.body.style.color = '#27272A';
     }
   }, [isDarkMode, darkModeClasses]);
 
@@ -31,11 +29,9 @@ const useDarkMode = () => {
     if (isDarkMode) {
       setDarkModeClasses('bg-zinc-800 text-white');
       document.body.style.backgroundColor = '#27272A';
-      document.body.style.color = 'white';
     } else {
       setDarkModeClasses('bg-white text-black');
       document.body.style.backgroundColor = 'white';
-      document.body.style.color = '#27272A';
     }
   }, [isDarkMode]);
 
