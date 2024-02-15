@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { isLoggedInState, searchContentsState } from '../recoilAtoms';
 import useReviewFetch from '../hooks/review/useReviewFetch';
 import CardWrapProvider from './WrapProvider/CardWrapProvider';
-import ResponsiveProvider from './WrapProvider/ResponsiveProvider';
+
 import Loading from './Loading';
 
 const CategoryReviewList = () => {
@@ -21,6 +21,13 @@ const CategoryReviewList = () => {
     navigator(`/detail/review/${review.userId}/${review._id}`);
   };
 
+  if (
+    latestReviewsQuery.isPending ||
+    tvContentReviewsQuery.isPending ||
+    movieContentReviewsQuery.isPending
+  ) {
+    return <Loading />;
+  }
   return (
     <React.Fragment>
       {isLoggedIn && searchContents.length !== 0 && (
@@ -30,39 +37,21 @@ const CategoryReviewList = () => {
           onClick={redirectContent}
         />
       )}
-      {latestReviewsQuery.isPending ? (
-        <ResponsiveProvider direction={'col'}>
-          <Loading />
-        </ResponsiveProvider>
-      ) : (
-        <CardWrapProvider
-          title={'최근에 작성된 리뷰들'}
-          cardList={latestReviewsQuery.data.data.reviews}
-          onClick={redirectReview}
-        />
-      )}
-      {tvContentReviewsQuery.isPending ? (
-        <ResponsiveProvider direction={'col'}>
-          <Loading />
-        </ResponsiveProvider>
-      ) : (
-        <CardWrapProvider
-          title={'TV 시리즈 리뷰들'}
-          cardList={tvContentReviewsQuery.data.data.tvContentReviews}
-          onClick={redirectReview}
-        />
-      )}
-      {movieContentReviewsQuery.isPending ? (
-        <ResponsiveProvider direction={'col'}>
-          <Loading />
-        </ResponsiveProvider>
-      ) : (
-        <CardWrapProvider
-          title={'영화 리뷰들'}
-          cardList={movieContentReviewsQuery.data.data.movieContentReviews}
-          onClick={redirectReview}
-        />
-      )}
+      <CardWrapProvider
+        title={'최근에 작성된 리뷰들'}
+        cardList={latestReviewsQuery.data.data.reviews}
+        onClick={redirectReview}
+      />
+      <CardWrapProvider
+        title={'TV 시리즈 리뷰들'}
+        cardList={tvContentReviewsQuery.data.data.tvContentReviews}
+        onClick={redirectReview}
+      />
+      <CardWrapProvider
+        title={'영화 리뷰들'}
+        cardList={movieContentReviewsQuery.data.data.movieContentReviews}
+        onClick={redirectReview}
+      />
     </React.Fragment>
   );
 };

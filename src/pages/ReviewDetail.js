@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userInfoState } from '../recoilAtoms';
 
@@ -26,79 +26,72 @@ export default function ReviewDetail() {
   };
 
   useEffect(() => {
-    if (!selectReviewQuery.isLoading) {
+    if (!selectReviewQuery.isPending) {
       const stars = Array.from({ length: +selectReviewQuery.data.data.review.grade }, () => 0);
       setStars(stars);
     }
-  }, [selectReviewQuery.isLoading]);
+  }, [selectReviewQuery.isPending]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  if (selectReviewQuery.isPending) {
+    return <Loading />;
+  }
+
   return (
     <React.Fragment>
-      {selectReviewQuery.isLoading ? (
-        <Loading />
-      ) : (
-        <React.Fragment>
-          <DetailBackground path={selectReviewQuery.data.data.review.contentBackdropImg} />
-          <ResponsiveProvider direction={'col'} className={'gap-5 z-10'}>
-            <p>
-              {selectReviewQuery.data.data.review.userName}님의{' '}
-              {selectReviewQuery.data.data.review.contentName} 리뷰
-            </p>
-            <p>{formatDateWithTime(selectReviewQuery.data.data.review.createTime)} 작성</p>
-            <p className='border border-b-4 p-2 text-center leading-loose text-3xl md:text-5xl'>
-              {selectReviewQuery.data.data.review.lineReview}
-            </p>
-            {selectReviewQuery.data.data.review.longReview !== '' && (
-              <p className='leading-loose text-lg md:text-5xl'>
-                {selectReviewQuery.data.data.review.longReview}
-              </p>
-            )}
+      <DetailBackground path={selectReviewQuery.data.data.review.contentBackdropImg} />
+      <ResponsiveProvider direction={'col'} className={'gap-5 z-10'}>
+        <p>
+          {selectReviewQuery.data.data.review.userName}님의{' '}
+          {selectReviewQuery.data.data.review.contentName} 리뷰
+        </p>
+        <p>{formatDateWithTime(selectReviewQuery.data.data.review.createTime)} 작성</p>
+        <p className='border border-b-4 p-2 text-center leading-loose text-3xl md:text-5xl'>
+          {selectReviewQuery.data.data.review.lineReview}
+        </p>
+        {selectReviewQuery.data.data.review.longReview !== '' && (
+          <p className='leading-loose text-lg md:text-5xl'>
+            {selectReviewQuery.data.data.review.longReview}
+          </p>
+        )}
 
-            <p className='flex flex-row gap-1'>
-              {stars.map((_, i) => {
-                return <StarIcon key={i} color={'yellow'} />;
-              })}
-            </p>
-          </ResponsiveProvider>
-          <ResponsiveProvider direction={'col'} className={'gap-5 z-10 lg:flex-row transition-all'}>
-            <Button label={'좋아요 🤩'} bg={'main'} className={'lg:w-6/12 w-full text-lg'} />
-            <Button label={'별로에요 🧐'} bg={'main'} className={'lg:w-6/12 w-full text-lg'} />
-            {user._id === selectReviewQuery.data.data.review.userId && (
-              <React.Fragment>
-                <Button
-                  onClick={directUpdate}
-                  label={'수정'}
-                  bg={'main'}
-                  className={'lg:w-3/12 w-full text-lg'}
-                />
-                <Button
-                  onClick={reviewDeleteMutate.mutate}
-                  label={'삭제'}
-                  bg={'alert'}
-                  className={'lg:w-3/12 w-full text-lg'}
-                />
-              </React.Fragment>
-            )}
-          </ResponsiveProvider>
-          <ResponsiveProvider>
-            <p
-              className='text-xl cursor-pointer hover:text-violet-400 z-10'
-              onClick={() => {
-                navigator(
-                  `/detail/${selectReviewQuery.data.data.review.contentType}/${selectReviewQuery.data.data.review.contentId}`,
-                );
-              }}
-            >
-              {selectReviewQuery.data.data.review.contentName} 다른 리뷰도 보러가기 !{' '}
-              <span className='text-3xl'>👈</span>
-            </p>
-          </ResponsiveProvider>
-        </React.Fragment>
-      )}
+        <p className='flex flex-row gap-1'>
+          {stars.map((_, i) => {
+            return <StarIcon key={i} color={'yellow'} />;
+          })}
+        </p>
+      </ResponsiveProvider>
+      <ResponsiveProvider direction={'col'} className={'gap-5 z-10 lg:flex-row transition-all'}>
+        <Button label={'좋아요 🤩'} bg={'main'} className={'lg:w-6/12 w-full text-lg'} />
+        <Button label={'별로에요 🧐'} bg={'main'} className={'lg:w-6/12 w-full text-lg'} />
+        {user._id === selectReviewQuery.data.data.review.userId && (
+          <React.Fragment>
+            <Button
+              onClick={directUpdate}
+              label={'수정'}
+              bg={'main'}
+              className={'lg:w-3/12 w-full text-lg'}
+            />
+            <Button
+              onClick={reviewDeleteMutate.mutate}
+              label={'삭제'}
+              bg={'alert'}
+              className={'lg:w-3/12 w-full text-lg'}
+            />
+          </React.Fragment>
+        )}
+      </ResponsiveProvider>
+      <ResponsiveProvider>
+        <Link
+          className='text-xl cursor-pointer hover:text-violet-400 z-10'
+          to={`/detail/${selectReviewQuery.data.data.review.contentType}/${selectReviewQuery.data.data.review.contentId}`}
+        >
+          {selectReviewQuery.data.data.review.contentName} 다른 리뷰도 보러가기 !
+        </Link>
+      </ResponsiveProvider>
       <CategoryReviewList />
       <Footer />
     </React.Fragment>
