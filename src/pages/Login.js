@@ -8,6 +8,7 @@ import ResponsiveProvider from '../components/WrapProvider/ResponsiveProvider';
 import { inputHandler } from '../util/inputValue';
 import { PasswordRegTest, emailRegTest } from '../util/Regs';
 import EyeIcon from '../icons/EyeIcon';
+import Banner from '../components/Banner';
 
 export default function Login() {
   const navigator = useNavigate();
