@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { isLoggedInState, searchContentsState } from '../recoilAtoms';
 import useReviewFetch from '../hooks/review/useReviewFetch';
 import CardWrapProvider from './WrapProvider/CardWrapProvider';
-
+import Footer from './Footer';
 import Loading from './Loading';
 
 const CategoryReviewList = () => {
@@ -52,6 +52,7 @@ const CategoryReviewList = () => {
         cardList={movieContentReviewsQuery.data.data.movieContentReviews}
         onClick={redirectReview}
       />
+      <Footer />
     </React.Fragment>
   );
 };
