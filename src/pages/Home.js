@@ -1,6 +1,5 @@
 import React from 'react';
 // import Banner from '../components/Banner';
-import Footer from '../components/Footer';
 import CategoryReviewList from '../components/CategoryReviewList';
 
 export default function Home() {
@@ -8,7 +7,6 @@ export default function Home() {
     <React.Fragment>
       {/* <Banner /> */}
       <CategoryReviewList />
-      <Footer />
     </React.Fragment>
   );
 }
