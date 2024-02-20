@@ -28,33 +28,38 @@ export default function Header() {
       className={`h-12 fixed top-0 left-0 right-0 p-3 flex items-center justify-center shadow-lg z-20 ${darkModeClasses}`}
     >
       <nav className='flex justify-around gap-3 md:w-7/12 w-10/12 transition-all'>
-        <div className='hover:text-violet-400 transition-all'>
-          <Link to={'/'}>
-            <h1 className='text-md'>ROOM CRITIC</h1>
-          </Link>
-        </div>
+        <Link to={'/'}>
+          <h1 className='hover:text-violet-400 transition-all w-min-fit'>ROOM CRITIC</h1>
+        </Link>
         <div className='grow'></div>
         <div>
           {isLoggedIn ? (
-            <div className='flex gap-3 items-center justify-center'>
-              <div className='hover:text-violet-400 transition-all'>
-                <Link to={`/mypage/${userInfo._id}`}>{userInfo.displayName} 평론가</Link>
-              </div>
-              <button onClick={submitLogout} className='hover:text-violet-400'>
+            <div className='flex gap-3 items-center justify-center w-min-fit'>
+              <Link
+                className='hover:text-violet-400 transition-all w-min-fit'
+                to={`/mypage/${userInfo._id}`}
+              >
+                {userInfo.displayName} 평론가
+              </Link>
+              <button
+                onClick={submitLogout}
+                className='hover:text-violet-400 transition-all w-min-fit'
+              >
                 로그아웃
               </button>
-              <div className='hover:text-violet-400 transition-all'>
-                <Link to={'/serch'}>검색</Link>
-              </div>
+              <Link className='hover:text-violet-400 transition-all w-min-fit' to={'/serch'}>
+                검색
+              </Link>
             </div>
           ) : (
-            <div className='flex gap-5'>
-              <div className='hover:text-violet-400 transition-all'>
-                <Link to={'/login'}>로그인</Link>
-              </div>
-              <div className='hover:text-violet-400 transition-all'>
-                <Link to={'/join'}>회원가입</Link>
-              </div>
+            <div className='flex gap-5 w-min-fit'>
+              <Link className='hover:text-violet-400 transition-all w-min-fit' to={'/login'}>
+                로그인
+              </Link>
+
+              <Link className='hover:text-violet-400 transition-all w-min-fit' to={'/join'}>
+                회원가입
+              </Link>
             </div>
           )}
         </div>
