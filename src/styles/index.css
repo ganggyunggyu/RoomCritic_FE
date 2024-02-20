@@ -4,44 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Protest+Strike&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dongle&family=Protest+Strike&display=swap');
 
-@font-face {
-  font-family: 'DNFForgedBlade';
-  font-style: normal;
-  font-weight: 300;
-  src: url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Light.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'DNFForgedBlade';
-  font-style: normal;
-  font-weight: 500;
-  src: url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Medium.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'DNFForgedBlade';
-  font-style: normal;
-  font-weight: 700;
-  src: url('//cdn.df.nexon.com/img/common/font/DNFForgedBlade-Bold.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'WandohopeR';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/WandohopeR.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'ChosunGu';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/ChosunGu.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
 @font-face {
   font-family: 'GangwonEdu_OTFBoldA';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff')
@@ -49,14 +12,6 @@
   font-weight: normal;
   font-style: normal;
 }
-@font-face {
-  font-family: 'GmarketSansMedium';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
-    format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 body {
   line-height: 1;
 }
@@ -65,7 +20,6 @@ body {
   font-weight: 400;
   font-style: normal;
 }
-
 h1 {
   font-family: 'Protest Strike', sans-serif;
   font-weight: 400;
