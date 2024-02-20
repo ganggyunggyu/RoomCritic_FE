@@ -48,6 +48,7 @@ const Banner = () => {
             onClick={(e) => {
               prevBannerButton(e);
             }}
+            title='left-move-btn'
           >
             <LeftChevrom />
           </button>
@@ -55,6 +56,7 @@ const Banner = () => {
             onClick={(e) => {
               nextBannerButton(e);
             }}
+            title='right-move-btn'
           >
             <RightChevrom />
           </button>
@@ -67,6 +69,7 @@ const Banner = () => {
                 onClick={(e) => {
                   bannerButton(e, i);
                 }}
+                title={`banner-select-${i + 1}-btn`}
                 className={`w-2 h-2 rounded-full transition-1s ${
                   bannerIndex === i ? 'bg-slate-200 w-8' : 'bg-slate-600'
                 }`}

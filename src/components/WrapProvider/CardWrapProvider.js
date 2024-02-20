@@ -31,6 +31,7 @@ const CardWrapProvider = ({ title, cardList, onClick, isHover }) => {
               onClick={() => {
                 handleScroll('left');
               }}
+              title='card-left-btn'
               className='w-12 h-12 bg-slate-500 rounded-full flex items-center justify-center'
             >
               <svg
@@ -54,6 +55,7 @@ const CardWrapProvider = ({ title, cardList, onClick, isHover }) => {
               onClick={() => {
                 handleScroll('right');
               }}
+              title='card-right-btn'
               className='w-12 h-12 bg-slate-500 rounded-full flex items-center justify-center'
             >
               <svg
