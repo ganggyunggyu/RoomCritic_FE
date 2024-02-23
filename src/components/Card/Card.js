@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import CardImage from './CardImage';
 import CardHover from './CardHover';
+import { cva } from 'class-variance-authority';
+import { cn } from '../../util/cn';
+
+export const CardWrapVariants = cva(``);
 
 export default function Card({ content, onClick, isHover }) {
   const [cardHover, setCardHover] = useState(false);
-  const [stars, setStars] = useState([]);
   const cardMouseOver = () => {
     setCardHover(true);
   };
@@ -18,7 +21,9 @@ export default function Card({ content, onClick, isHover }) {
     >
       {cardHover && <CardHover review={content.lineReview} />}
       {isHover && <CardHover review={content.lineReview} />}
-      <div className={`text-center flex gap-5 flex-col md:w-64 w-32 transition-1s`}>
+      <div
+        className={`text-center flex gap-5 flex-col md:w-[card-img-w] w-[card-img-sm-w] transition-1s`}
+      >
         <CardImage
           path={content.contentPosterImg || content.poster_path || content.backdrop_path}
         />
