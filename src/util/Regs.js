@@ -33,7 +33,7 @@ export const formatDateWithTime = (inputDateString) => {
   const hours = String(inputDate.getHours()).padStart(2, '0');
   const minutes = String(inputDate.getMinutes()).padStart(2, '0');
 
-  const formattedDate = `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분`;
-
-  return formattedDate;
+  const formattedDateEnd = `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분`;
+  const formattedMonthEnd = `${year}년 ${month}월`;
+  return { formattedDateEnd, formattedMonthEnd };
 };
