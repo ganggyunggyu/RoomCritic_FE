@@ -1,24 +1,46 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSetRecoilState } from 'recoil';
-import tmdbAxiosConfig from '../../api/tmdbAxiosConfig';
+
 import { searchContentsState } from '../../recoilAtoms';
+
+import axiosConfig from '../../api/axiosConfig';
 
 const useSearchContents = (searchValue) => {
   const setSerchContents = useSetRecoilState(searchContentsState);
 
   const fetchSearchContents = async () => {
-    const result = await tmdbAxiosConfig.get(
-      `/search/multi?include_adult=false&query=${searchValue}`,
-    );
-    setSerchContents(result.data.results);
+    const result = await axiosConfig.get(`content/search?search_value=${searchValue}`);
+
+    setSerchContents(result.data.contents);
     return result;
   };
+  const fetchSearchTvContents = async () => {
+    const result = await axiosConfig.get(`content/search/tv?search_value=${searchValue}`);
+
+    setSerchContents(result.data.contents);
+    return result;
+  };
+  const fetchSearchMovieContents = async () => {
+    const result = await axiosConfig.get(`content/search/movie?search_value=${searchValue}`);
+
+    setSerchContents(result.data.contents);
+    return result;
+  };
+
   const searchContentsQuery = useQuery({
     queryKey: ['searchContents', searchValue],
     queryFn: fetchSearchContents,
   });
+  const searchTvContentsQuery = useQuery({
+    queryKey: ['searchTvContents', searchValue],
+    queryFn: fetchSearchTvContents,
+  });
+  const searchMovieContentsQuery = useQuery({
+    queryKey: ['searchMovieContents', searchValue],
+    queryFn: fetchSearchMovieContents,
+  });
 
-  return { searchContentsQuery };
+  return { searchContentsQuery, searchTvContentsQuery, searchMovieContentsQuery };
 };
 
 export default useSearchContents;
