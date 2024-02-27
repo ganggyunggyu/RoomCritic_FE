@@ -41,7 +41,7 @@ export default function MyPage() {
   if (!isGenreScoreLoading && !isMyReviewLoading) {
     const { reviewCount, genreScore } = genreScoreData.data;
     const { reviews } = myReviewData.data;
-    console.log(genreScore);
+
     return (
       <ResponsiveProvider
         direction={'col'}

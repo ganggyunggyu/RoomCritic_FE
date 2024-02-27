@@ -43,9 +43,6 @@ export default function ContentDetail() {
     const content = contentData.data.content;
     const reviews = reviewsData.data.reviews;
 
-    console.log(content);
-    console.log(reviews);
-
     return (
       <React.Fragment>
         <ResponsiveProvider direction={'col'} className={'gap-10'}>
