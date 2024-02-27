@@ -1,9 +1,10 @@
 import React from 'react';
 import Card from '../Card/Card';
-import ResponsiveProvider from './ResponsiveProvider';
-import Loading from '../Loading';
 
-const CardWrapProvider = ({ title, cardList, onClick, isHover }) => {
+import Loading from '../Loading';
+import { cn } from '../../util/cn';
+
+const CardWrapProvider = ({ title, cardList, onClick, isHover, ...props }) => {
   const cardConatinerRef = React.useRef(null);
 
   const handleScroll = (direction) => {
@@ -20,12 +21,12 @@ const CardWrapProvider = ({ title, cardList, onClick, isHover }) => {
   };
 
   return (
-    <ResponsiveProvider direction={'row'}>
+    <React.Fragment>
       {!cardList && <Loading />}
       {!cardList.length && cardList.length !== 0 && <Loading />}
-      {cardList.length === 0 && '작품이 없습니다.'}
-      {cardList.length > 0 && (
-        <div className='w-full z-10 relative'>
+      {cardList.length === 0 && <p>작품이 없습니다</p>}
+      {cardList.length && (
+        <div className={cn(`w-full z-10 relative py-3 md:py-5`)} {...props}>
           <div className='absolute inset-y-0 left-0 z-20 rounded-full opacity-50 flex items-center justify-center hover:opacity-80 transition-all'>
             <button
               onClick={() => {
@@ -90,7 +91,7 @@ const CardWrapProvider = ({ title, cardList, onClick, isHover }) => {
           </div>
         </div>
       )}
-    </ResponsiveProvider>
+    </React.Fragment>
   );
 };
 export default CardWrapProvider;

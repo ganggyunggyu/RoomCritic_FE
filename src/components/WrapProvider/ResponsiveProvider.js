@@ -1,6 +1,6 @@
 import { cva } from 'class-variance-authority';
 import { cn } from '../../util/cn';
-export const ResponsiveProviderVariants = cva(`md:w-7/12 w-10/12 flex pt-10`, {
+export const ResponsiveProviderVariants = cva(`w-10/12 flex pt-10`, {
   variants: {
     direction: {
       col: `flex-col items-center justify-center`,

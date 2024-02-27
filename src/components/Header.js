@@ -27,7 +27,7 @@ export default function Header() {
     <header
       className={`h-12 fixed top-0 left-0 right-0 p-3 flex items-center justify-center shadow-lg z-20 ${darkModeClasses}`}
     >
-      <nav className='flex justify-around gap-3 md:w-7/12 w-10/12 transition-all'>
+      <nav className='flex justify-around gap-3 w-10/12 transition-all'>
         <Link to={'/'}>
           <h1 className='hover:text-violet-400 transition-all w-min-fit'>ROOM CRITIC</h1>
         </Link>

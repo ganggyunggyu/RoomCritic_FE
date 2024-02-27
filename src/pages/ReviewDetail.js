@@ -39,7 +39,7 @@ export default function ReviewDetail() {
   if (selectReviewQuery.isPending) {
     return <Loading />;
   }
-
+  const { formattedDateEnd } = formatDateWithTime(selectReviewQuery.data.data.review.createTime);
   return (
     <React.Fragment>
       <DetailBackground path={selectReviewQuery.data.data.review.contentBackdropImg} />
@@ -48,7 +48,7 @@ export default function ReviewDetail() {
           {selectReviewQuery.data.data.review.userName}님의{' '}
           {selectReviewQuery.data.data.review.contentName} 리뷰
         </p>
-        <p>{formatDateWithTime(selectReviewQuery.data.data.review.createTime)} 작성</p>
+        <p>{formattedDateEnd} 작성</p>
         <p className='border border-b-4 p-2 text-center leading-loose text-3xl md:text-5xl'>
           {selectReviewQuery.data.data.review.lineReview}
         </p>
@@ -87,7 +87,7 @@ export default function ReviewDetail() {
       <ResponsiveProvider>
         <Link
           className='text-xl cursor-pointer hover:text-violet-400 z-10'
-          to={`/detail/${selectReviewQuery.data.data.review.contentType}/${selectReviewQuery.data.data.review.contentId}`}
+          to={`/content/${selectReviewQuery.data.data.review.contentType}/${selectReviewQuery.data.data.review.contentId}`}
         >
           {selectReviewQuery.data.data.review.contentName} 다른 리뷰도 보러가기 !
         </Link>
