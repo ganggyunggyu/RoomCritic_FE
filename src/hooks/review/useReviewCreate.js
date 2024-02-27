@@ -22,7 +22,7 @@ const useReviewCreate = (createData) => {
     mutationFn: () => reviewCreate(createData),
     onSuccess: () => {
       console.log('글쓰기 성공');
-      navigator(`/detail/${createData.contentType}/${createData.contentId}`);
+      navigator(`/content/${createData.contentType}/${createData.contentId}`);
     },
     onError: () => {
       console.error('에러 발생');

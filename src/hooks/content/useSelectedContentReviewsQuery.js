@@ -1,21 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import axiosConfig from '../../api/axiosConfig';
 
-const fetchSelectedContentReviews = async (contentId, contentType) => {
+const fetchSelectedContentReviews = async (contentType, contentId) => {
+  console.log(contentType, contentId);
   try {
-    const result = await axiosConfig.get(`review/${contentId}/${contentType}`);
+    const result = await axiosConfig.get(`review/${contentType}/${contentId}`);
     return result;
   } catch (err) {
     console.log(err);
   }
 };
-
-const useSelectedContentReviews = (contentId, contentType) => {
+const useSelectedContentReviews = (contentType, contentId) => {
   const selectedContentReviewsQuery = useQuery({
-    queryKey: ['selectContentReviews', contentId, contentType],
-    queryFn: () => fetchSelectedContentReviews(contentId, contentType),
+    queryKey: ['selectContentReviews', contentType, contentId],
+    queryFn: () => fetchSelectedContentReviews(contentType, contentId),
   });
-
   return { selectedContentReviewsQuery };
 };
 
