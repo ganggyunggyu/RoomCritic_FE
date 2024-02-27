@@ -14,8 +14,6 @@ const useJoin = (requestUserInfo) => {
         phoneNumber: requestUserInfo.phoneNumber,
       });
 
-      // alert(result.data.message);
-
       if (result.data.message === '회원가입 성공') navigator('/login');
       setData(result.data.message);
     } catch (error) {
