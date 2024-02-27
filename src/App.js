@@ -12,7 +12,7 @@ import Home from './pages/Home';
 import ContentDetail from './pages/ContentDetail';
 import Create from './pages/Create';
 import ReviewDetail from './pages/ReviewDetail';
-import DarkModeButton from './components/DarkModeButton';
+import DarkModeButton from './components/AtomComponent/DarkModeButton';
 import KakaoLogin from './pages/KakaoLogin';
 import useDarkMode from './hooks/useDarkMode';
 import useLogin from './hooks/auth/useLogin';
@@ -37,9 +37,9 @@ function App() {
           <Route path='/join' element={<Join />} />
           <Route path='/login' element={<Login />} />
           <Route path='/serch' element={<Serch />} />
-          <Route path='/detail/:mediaType/:contentId' element={<ContentDetail />} />
+          <Route path='/content/:contentType/:contentId' element={<ContentDetail />} />
           <Route path='/detail/review/:userId/:reviewId' element={<ReviewDetail />} />
-          <Route path='/create/:mediaType/:contentId' element={<Create />} />
+          <Route path='/create/:contentType/:contentId' element={<Create />} />
           <Route path='/update/:userId/:reviewId' element={<Update />} />
           <Route path='/auth' element={<KakaoLogin />} />
         </Routes>
