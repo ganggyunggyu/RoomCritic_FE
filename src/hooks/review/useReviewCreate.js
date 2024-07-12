@@ -1,6 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import axiosConfig from '../../api/axiosConfig';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import useSelectedContentReviews from '../content/useSelectedContentReviewsQuery';
 
 const reviewCreate = async (createData) => {
   try {
@@ -16,13 +18,21 @@ const reviewCreate = async (createData) => {
   }
 };
 
-const useReviewCreate = (createData) => {
-  const navigator = useNavigate();
+const useReviewCreate = (createData, setReview) => {
+  const { selectedContentReviewsQuery } = useSelectedContentReviews(
+    createData.contentType,
+    createData.contentId,
+  );
+  const [isWritingCompleted, setIsWritingCompleted] = useState(false);
+
   const createMutate = useMutation({
     mutationFn: () => reviewCreate(createData),
     onSuccess: () => {
       console.log('글쓰기 성공');
-      navigator(`/content/${createData.contentType}/${createData.contentId}`);
+
+      setIsWritingCompleted(true);
+      selectedContentReviewsQuery.refetch();
+      setReview('');
     },
     onError: () => {
       console.error('에러 발생');
@@ -32,7 +42,7 @@ const useReviewCreate = (createData) => {
     },
   });
 
-  return { createMutate };
+  return { createMutate, isWritingCompleted };
 };
 
 export default useReviewCreate;

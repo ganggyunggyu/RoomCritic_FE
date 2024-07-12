@@ -13,7 +13,6 @@ import { isLoggedInState } from '../recoilAtoms';
 import useSeletedContentReviews from '../hooks/content/useSelectedContentReviewsQuery';
 import Loading from '../components/Loading';
 import CreateForm from '../components/CreateForm';
-import { formatDateWithTime } from '../util/Regs';
 
 export default function ContentDetail() {
   const navigator = useNavigate();

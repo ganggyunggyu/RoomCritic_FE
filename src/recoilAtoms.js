@@ -1,4 +1,7 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist();
 
 export const isLoggedInState = atom({
   key: 'inLoggedInState',
@@ -23,6 +26,7 @@ export const selectReviewState = atom({
 export const isDarkModeState = atom({
   key: 'isDarkModeState',
   default: false,
+  effects_UNSTABLE: [persistAtom],
 });
 export const darkModeClassesState = atom({
   key: 'darkModeClassesState',

@@ -1,8 +1,6 @@
 import './styles/App.css';
-
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-
 import Header from './components/Header';
 import Join from './pages/Join';
 import Login from './pages/Login';
@@ -23,7 +21,7 @@ function App() {
   const { isDarkMode, darkModeClasses, toggleDarkMode } = useDarkMode();
   const { fetchLogin } = useLogin();
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchLogin();
   }, []);
 

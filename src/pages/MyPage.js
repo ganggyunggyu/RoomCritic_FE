@@ -54,7 +54,7 @@ export default function MyPage() {
               className='rounded-full'
               width={'150px'}
               height={'150px'}
-              src='https://i.pinimg.com/564x/90/c9/b0/90c9b09c7152448fe3dd41d5dbea6dbb.jpg'
+              src='https://i.pinimg.com/564x/5c/a2/e6/5ca2e650b72d9f34f71c835762ee6722.jpg'
               alt='profile-img'
             />
             <Button item={<SettingIcon />} className={'h-12 w-12 hover:text-violet-400'} />

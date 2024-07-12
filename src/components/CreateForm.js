@@ -24,7 +24,7 @@ const CreateForm = ({ content }) => {
     contentType: content.content_type,
   };
 
-  const { createMutate } = useReviewCreate(reviewData);
+  const { createMutate, isWritingCompleted } = useReviewCreate(reviewData, setReview);
   const { mutate } = createMutate;
 
   const stars = [1, 2, 3, 4, 5];
@@ -35,7 +35,9 @@ const CreateForm = ({ content }) => {
   const buttonConfig = {
     label: '발행',
     bg: 'main',
-    onClick: mutate,
+    onClick: () => {
+      mutate();
+    },
   };
   return (
     <React.Fragment>
@@ -55,7 +57,7 @@ const CreateForm = ({ content }) => {
         })}
       </div>
       <span>
-        {userInfo.displayName}님의 평점 <span className='text-violet-400'>{grade}점!</span>
+        {userInfo.displayName}님의 평점 <span className='text-yellow-400'>{grade}점!</span>
       </span>
       <Input
         label={'한줄평 작성'}
@@ -73,6 +75,13 @@ const CreateForm = ({ content }) => {
         // }}
         buttonConfig={buttonConfig}
       />
+      {isWritingCompleted && (
+        <div>
+          <p className=''>
+            리뷰 작성이 완료되었어요! <span className='animate-bounce'>👇</span>
+          </p>
+        </div>
+      )}
     </React.Fragment>
   );
 };

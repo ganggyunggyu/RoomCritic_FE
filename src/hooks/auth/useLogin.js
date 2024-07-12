@@ -16,9 +16,9 @@ const useLogin = (requestUserInfo) => {
         email: requestUserInfo.email,
         password: requestUserInfo.password,
       });
-
+      console.log(result);
       if (result.status === 200) {
-        setUserInfo(result.data.userInfo);
+        setUserInfo(result.data.userInfo._doc);
         setIsLoggedIn(result.data.isLoggedIn);
         navigator('/');
       }
@@ -34,6 +34,7 @@ const useLogin = (requestUserInfo) => {
   const fetchLogin = async () => {
     try {
       const result = await axiosConfig.get('/auth/login/check');
+      console.log(result.data);
       if (result.status === 200) {
         setIsLoggedIn(true);
         setUserInfo(result.data.userInfo.user);

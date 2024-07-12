@@ -32,7 +32,7 @@ export default function Card({ content, onClick, isHover }) {
           {content.title || content.contentName}
         </p>
 
-        {content.countvote_average === 0 ? (
+        {content.vote_average === 0 ? (
           <p className='text-sm z-10'>별점 정보가 없네요</p>
         ) : (
           <p className='text-sm z-10'>

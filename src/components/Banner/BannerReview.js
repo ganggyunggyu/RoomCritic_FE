@@ -14,10 +14,10 @@ const BannerReview = ({ review }) => {
   return (
     <React.Fragment>
       <div
-        className='md:w-5/12 w-6/12 flex items-center opacity-40 blur-lg 
+        className='md:w-7/12 w-10/12 flex items-center opacity-40 blur-lg 
       absolute top-0 bottom-0 pl-20 pr-10 bg-black pointer-events-none transition-all text-viloet-300 text-rose-300 text-green-300 hover:text-rose-700 hover:text-green-700 hover:text-violet-700'
       />
-      <div className='md:w-7/12 w-10/12 flex flex-col justify-center gap-1 md:gap-3 transition-all max-w-fit absolute top-0 bottom-0 left-12 md:left-40'>
+      <div className='md:w-7/12 w-10/12 flex flex-col justify-center gap-1 md:gap-3 transition-all max-w-fit absolute top-0 bottom-0 left-16 md:left-20'>
         <p
           style={{ color: movieColor }}
           className={cn(`md:text-5xl text-xl transition-1s text-${movieColor}-300`)}
